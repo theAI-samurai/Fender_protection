@@ -1,15 +1,8 @@
 
-from os.path import dirname, realpath
+
 import cv2
 from ctypes import *
-import math
 import random
-import os
-import numpy as np
-import matplotlib.pyplot as plt
-
-dir_of_file = dirname(realpath(__file__))
-os.chdir(dir_of_file)
 
 
 def sample(probs):
@@ -222,7 +215,8 @@ network_predict_batch = lib.network_predict_batch
 network_predict_batch.argtypes = [c_void_p, IMAGE, c_int, c_int, c_int, c_float, c_float, POINTER(c_int), c_int, c_int]
 network_predict_batch.restype = POINTER(DETNUMPAIR)
 
-class YoloDetection:
+
+class ObjectDetection:
 
     def __init__(self, cfgPath, wgtPath, dataPath):
         self.net = load_net(cfgPath.encode('ascii'), wgtPath.encode('ascii'), 0)

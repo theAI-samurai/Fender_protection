@@ -1,4 +1,4 @@
-from darknet_ankit import *
+from darknet import *
 import cv2
 from os.path import dirname, realpath
 import os
@@ -19,7 +19,7 @@ IP_STREAM_1 = 'ws://localhost:8082/'
 IP_STREAM_1 = 'D:/00000000073000000.mp4'
 
 
-ship_det = YoloDetection(dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
+ship_det = ObjectDetection(dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                          dir_of_file + '/ship/cfg/yolov3_full_ship_2000.weights',
                          dir_of_file + '/ship/cfg/ship.data'
                          )
