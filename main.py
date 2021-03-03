@@ -1,9 +1,9 @@
 from darknet import *
 import cv2
-from os.path import dirname, realpath
-import os
 import requests
 
+from os.path import dirname, realpath
+import os
 dir_of_file = dirname(realpath(__file__))
 os.chdir(dir_of_file)
 
