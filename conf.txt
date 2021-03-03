@@ -1,0 +1,7 @@
+[camera_1]
+feeder_path = 'D:/my_repos/darknet_fender_protection/ship/test_data/video.mp4'
+param_id = 1
+
+[GET_POST_URL]
+notification = 'http://vmi317167.contaboserver.net/ship-detection-api/api/v1/notification/create'
+markup = 'http://vmi317167.contaboserver.net/ship-detection-api/api/v1/guard/drawing/'
