@@ -11,7 +11,7 @@ feeder_path = rtsp://192.168.29.89:8554/vlc
 param_id = 3
 
 [camera_4]
-feeder_path = rtsp://192.168.29.17:8554/vlc
+feeder_path = rtsp://admin:DS-2CD206@192.168.29.32
 param_id = 4
 
 [RESOLUTION]

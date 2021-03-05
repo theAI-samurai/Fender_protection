@@ -35,5 +35,6 @@ def active_streams_initialize(data):
     return list(set(active_lst))
 
 
-
+def height_width_validate():
+    print('pass')
 

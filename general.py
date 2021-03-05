@@ -27,3 +27,16 @@ for j in range(len(imges)):
 
 cv2.destroyAllWindows()
 video.release()
+
+import cv2
+path  = r'D:\my_repos\darknet_fender_protection\ship\test_data\wassup.mp4'
+cap = cv2.VideoCapture(path)
+ctr = 0
+while cap.isOpened():
+    ret, frame = cap.read()
+    print(ret)
+    if ret:
+        cv2.imwrite("temp_frame"+str(ctr)+".jpg", frame)
+        ctr = ctr+1
+    else:
+        break
