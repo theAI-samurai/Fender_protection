@@ -1,7 +1,16 @@
 [camera_1]
-feeder_path = 'D:/my_repos/darknet_fender_protection/ship/test_data/video.mp4'
+feeder_path = D:/my_repos/darknet_fender_protection/ship/test_data/video.mp4
 param_id = 1
 
+[camera_2]
+feeder_path = rtsp://192.168.29.87:8554/vlc
+param_id = 2
+
+[RESOLUTION]
+WIDTH = 960
+HEIGHT = 576
+
 [GET_POST_URL]
-notification = 'http://vmi317167.contaboserver.net/ship-detection-api/api/v1/notification/create'
-markup = 'http://vmi317167.contaboserver.net/ship-detection-api/api/v1/guard/drawing/'
+notification = http://vmi317167.contaboserver.net/ship-detection-api/api/v1/notification/list
+markup = http://vmi317167.contaboserver.net/ship-detection-api/api/v1/guard/drawing/
+ref = http://vmi317167.contaboserver.net/ship-detection-api/api/v1/guard/video-snapshot/
