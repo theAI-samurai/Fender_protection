@@ -1,9 +1,9 @@
 [camera_1]
-feeder_path = D:/my_repos/darknet_fender_protection/ship/test_data/video.mp4
+feeder_path = D:/darknet_fender_protection/ship/test_data/video.mp4
 param_id = 1
 
 [camera_2]
-feeder_path = rtsp://192.168.29.87:8554/vlc
+feeder_path = rtsp://192.168.6.62:8554/stream
 param_id = 2
 
 [camera_3]
