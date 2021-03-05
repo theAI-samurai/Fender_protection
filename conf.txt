@@ -6,6 +6,14 @@ param_id = 1
 feeder_path = rtsp://192.168.29.87:8554/vlc
 param_id = 2
 
+[camera_3]
+feeder_path = rtsp://192.168.29.89:8554/vlc
+param_id = 3
+
+[camera_4]
+feeder_path = rtsp://192.168.29.17:8554/vlc
+param_id = 4
+
 [RESOLUTION]
 WIDTH = 960
 HEIGHT = 576
