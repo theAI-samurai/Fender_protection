@@ -47,7 +47,8 @@ for cam_ in cam:    # active_cameras:
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
                     if overlap:
-                        r = requests.post(url=notification_url, data={'Threat': 'yes', 'object': cls})
+                        notification_trigger(cameraID=cam_, object=cls, status='Threat',
+                                             object_known='Known',image_path= frame_path)
                     else:
                         print('Nothing detected')
 
