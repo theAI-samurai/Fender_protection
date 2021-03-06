@@ -10,6 +10,24 @@ Date Modified   : Mar 05, 2021
 
 from read_config import *
 import cv2
+import vlc
+import time
+
+
+def active_streams_initialize_vlc(data):
+    lst = dict.keys(data)
+    active_lst = []
+    for cp in lst:
+        player = vlc.MediaPlayer(data[cp])
+        print(cp, player)
+        player.play()
+        time.sleep(1)
+        if player.is_playing():
+            player.stop()
+            player.release()
+            active_lst.append(cp)
+
+    return list(set(active_lst))
 
 
 def active_streams_initialize(data):
@@ -31,7 +49,6 @@ def active_streams_initialize(data):
                 active_lst.append(cp)
             else:
                 break
-
     return list(set(active_lst))
 
 

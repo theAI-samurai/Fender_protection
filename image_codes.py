@@ -5,8 +5,7 @@ import time
 
 def read_frames_using_vlc(player, delay_time, cam_id, base_path):
     player.play()  # --> play
-    if player.will_play():
-        print('playing')
+    if player.is_playing():
         time.sleep(delay_time)
         player.video_take_snapshot(0, base_path + str(cam_id) + '.jpg', 0, 0)
         return True

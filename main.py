@@ -8,7 +8,7 @@ import math
 vlc_player_object = {}
 
 # validate Active Streams
-active_cameras = active_streams_initialize(all_camera_data)     # list of active camera ids
+active_cameras = active_streams_initialize_vlc(all_camera_data)     # list of active camera ids
 
 # get markup and snapshot images for active cameras
 for id in active_cameras:
