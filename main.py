@@ -21,13 +21,15 @@ obj_detect = ObjectDetection(dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                              dir_of_file + '/ship/cfg/yolov3_full_ship_2000.weights',
                              dir_of_file + '/ship/cfg/ship.data'
                              )
-cam = ['3']         # ----------> setting this for Testing pourpose only
+cam = ['1']         # ----------> setting this for Testing pourpose only
 
 for cam_ in cam:   # active_cameras:
     vlc_player_object.update({cam_: vlc.MediaPlayer(all_camera_data[cam_])})
 
 for cam_ in cam:    # active_cameras:
-    fender_image, minx, miny, maxx, maxy = fender_coordi(dir_of_file+'/ship/reference_files/fender_'+(cam_)+'.jpg')
+    fender_image, minx, miny, maxx, maxy = fender_coordi(dir_of_file+'/ship/reference_files/markup_'+(cam_)+'.jpg')
+    # fender_image = cv2.circle(fender_image, (minx,miny), radius=5, color=(255, 0, 255), thickness=3)
+
     while True:
         read = read_frames_using_vlc(player=vlc_player_object[cam_],  delay_time=1,
                               cam_id=cam_, base_path=dir_of_file+'/ship/reference_files/')
