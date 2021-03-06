@@ -15,7 +15,6 @@ def read_frames_using_vlc(player, delay_time, cam_id, base_path):
 
 def fender_coordi(path_):
     fender_ref = cv2.imread(path_)  # ---> H=400, W=500
-    print(fender_ref.shape)
     lst_x = []
     lst_y = []
     for i in range(fender_ref.shape[0]):  # ----> Height
