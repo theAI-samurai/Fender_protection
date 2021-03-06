@@ -1,6 +1,13 @@
 import cv2
 import vlc
 import time
+import rtsp
+
+stream1 = 'rtsp://admin:DS-2CD206@192.168.29.32'
+stream2 ='rtsp://192.168.29.73:8554/vlcc'
+#with rtsp.Client(stream) as client:
+#    time.sleep(1)
+#    client.preview()
 
 
 def read_frames_using_vlc(player, delay_time, cam_id, base_path):
@@ -11,7 +18,6 @@ def read_frames_using_vlc(player, delay_time, cam_id, base_path):
         return True
     else:
         return False
-
 
 def fender_coordi(path_):
     print('Fender_Reference_image ',path_)
@@ -44,4 +50,20 @@ def check_for_overlap(rec1_x1, rec1_y1, rec1_x2, rec1_y2, rec2_x1, rec2_y1, rec2
     else:
         print("there is no overlap")
         return False
+
+def read_frames_rtsp_lib(url, obj_client):
+    #with rtsp.Client(rtsp_server_uri = url) as client:
+    time.sleep(2)
+    #while True:
+    _image = obj_client.read(raw=True)
+    return _image
+
+#while True:
+#    client = rtsp.Client(rtsp_server_uri=stream2)
+#    img = read_frames_rtsp_lib(stream1, client)
+#    print(type(img))
+
+
+
+#a,b,c = read_frames_using_vlc()
 

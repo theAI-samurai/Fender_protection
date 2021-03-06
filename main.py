@@ -21,7 +21,7 @@ obj_detect = ObjectDetection(dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                              dir_of_file + '/ship/cfg/yolov3_full_ship_2000.weights',
                              dir_of_file + '/ship/cfg/ship.data'
                              )
-cam = ['1']         # ----------> setting this for Testing pourpose only
+cam = ['3']         # ----------> setting this for Testing pourpose only
 
 for cam_ in cam:   # active_cameras:
     vlc_player_object.update({cam_: vlc.MediaPlayer(all_camera_data[cam_])})
@@ -33,6 +33,7 @@ for cam_ in cam:    # active_cameras:
     while True:
         read = read_frames_using_vlc(player=vlc_player_object[cam_],  delay_time=1,
                               cam_id=cam_, base_path=dir_of_file+'/ship/reference_files/')
+        # print(read)
         if read:
             frame_path = dir_of_file+'/ship/reference_files/'+str(cam_)+'.jpg'
 
