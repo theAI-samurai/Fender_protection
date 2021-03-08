@@ -1,10 +1,12 @@
 from read_config import *
 from image_codes import *
 
+stream0 = 'D:/darknet_fender_protection/ship/test_data/video2.mp4'  # path1
 stream1 = 'rtsp://192.168.29.73:8554/vlc'
 stream2 = 'rtsp://admin:DS-2CD206@192.168.29.32'
 stream3 = 'rtsp://localhost:8554/stream'
 stream4 = 'rtsp://192.168.51.37:8554/streams'
+stream5 = 'rtsp://192.168.6.62:8554/stream'
 
 # Method 1 ---- using OPENCV
 cap = cv2.VideoCapture(stream3, cv2.CAP_FFMPEG)
