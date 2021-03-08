@@ -6,10 +6,11 @@ dir_of_file = dirname(realpath(__file__))
 os.chdir(dir_of_file)
 
 imges = []
-
-for f in os.listdir(dir_of_file + '/ship/test_data/') :
+path_ =dir_of_file + '/ship/test_data/'
+path_ ='D:/1/ships/'
+for f in os.listdir(path_) :
     if f.endswith('.jpg'):
-        temp = os.path.join(dir_of_file + '/ship/test_data/', f)
+        temp = os.path.join(path_, f)
         if os.path.exists(temp):
             img = cv2.imread(temp)
             imges.append(img)
@@ -20,7 +21,7 @@ for f in os.listdir(dir_of_file + '/ship/test_data/') :
         #else:
         #    print("Image path does not exsist")
 
-video=cv2.VideoWriter(os.path.join(dir_of_file + '/ship/test_data/', 'video.mp4'),-1,1,(imges[1].shape[1], imges[1].shape[0]))
+video=cv2.VideoWriter(os.path.join(path_, 'video.mp4'),-1,1,(imges[1].shape[1], imges[1].shape[0]))
 
 for j in range(len(imges)):
     video.write(imges[j])
