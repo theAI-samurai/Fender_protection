@@ -8,6 +8,7 @@ os.chdir(dir_of_file)
 imges = []
 path_ =dir_of_file + '/ship/test_data/'
 path_ ='D:/1/ships/'
+
 for f in os.listdir(path_) :
     if f.endswith('.jpg'):
         temp = os.path.join(path_, f)
