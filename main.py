@@ -5,10 +5,10 @@ from darknet import *
 from image_codes import *
 import math
 
-vlc_player_object = {}
-
 # validate Active Streams
 active_cameras = active_streams_initialize_vlc(all_camera_data)     # list of active camera ids
+# vlc_payer_object creation for active cameras
+vl_player_object = vlc_stream_object_init(act_cam_ids=active_cameras, conf_cam_data=all_camera_data)
 
 # get markup and snapshot images for active cameras
 for id in active_cameras:
@@ -21,12 +21,9 @@ obj_detect = ObjectDetection(dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                              dir_of_file + '/ship/cfg/yolov3_full_ship_2000.weights',
                              dir_of_file + '/ship/cfg/ship.data'
                              )
-cam = ['3']         # ----------> setting this for Testing pourpose only
+active_cameras = ['3']         # ----------> setting this for Testing pourpose only
 
-for cam_ in cam:   # active_cameras:
-    vlc_player_object.update({cam_: vlc.MediaPlayer(all_camera_data[cam_])})
-
-for cam_ in cam:    # active_cameras:
+for cam_ in active_cameras:    # active_cameras:
     fender_image, minx, miny, maxx, maxy = fender_coordi(dir_of_file+'/ship/reference_files/markup_'+(cam_)+'.jpg')
     # fender_image = cv2.circle(fender_image, (minx,miny), radius=5, color=(255, 0, 255), thickness=3)
 

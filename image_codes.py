@@ -1,13 +1,39 @@
+"""
+--------------------------------------------------
+filename        : data_validate.py
+Name            : Ankit Mishra
+Email           : ankitmishra723@gmail.com
+Date created    : Feb 28, 2021
+Date Modified   : Mar 10, 2021
+---------------------------------------------------
+"""
+
 import cv2
 import vlc
 import time
 import rtsp
 
 stream1 = 'rtsp://admin:DS-2CD206@192.168.29.32'
-stream2 ='rtsp://192.168.29.73:8554/vlcc'
-#with rtsp.Client(stream) as client:
-#    time.sleep(1)
-#    client.preview()
+stream2 = 'rtsp://192.168.29.73:8554/vlcc'
+
+
+def vlc_stream_object_init(act_cam_ids, conf_cam_data):
+    """----------------------------------
+    This function takes as input the list of Active Cameras
+    identified by the 'ACTIVE CAMERA INITIALIZE VLC in DataValidate.py'
+    and returns VLC player objects for the active streams.
+
+    Args:
+        act_cam_ids     : LIST of Active Camera IDs
+        conf_cam_data   : camera id and urls data from config file
+
+    Return:
+        vlc_player_object : DICT containing {cam_id : player_object}
+    ----------------------------------"""
+    vlc_player_object ={}
+    for cam in act_cam_ids:
+        vlc_player_object.update({cam: vlc.MediaPlayer(conf_cam_data[cam])})
+    return vlc_player_object
 
 
 def read_frames_using_vlc(player, delay_time, cam_id, base_path):
@@ -18,6 +44,7 @@ def read_frames_using_vlc(player, delay_time, cam_id, base_path):
         return True
     else:
         return False
+
 
 def fender_coordi(path_):
     print('Fender_Reference_image ',path_)
@@ -51,6 +78,7 @@ def check_for_overlap(rec1_x1, rec1_y1, rec1_x2, rec1_y2, rec2_x1, rec2_y1, rec2
         print("there is no overlap")
         return False
 
+
 def read_frames_rtsp_lib(url, obj_client):
     #with rtsp.Client(rtsp_server_uri = url) as client:
     time.sleep(2)
@@ -58,12 +86,5 @@ def read_frames_rtsp_lib(url, obj_client):
     _image = obj_client.read(raw=True)
     return _image
 
-#while True:
-#    client = rtsp.Client(rtsp_server_uri=stream2)
-#    img = read_frames_rtsp_lib(stream1, client)
-#    print(type(img))
 
-
-
-#a,b,c = read_frames_using_vlc()
 

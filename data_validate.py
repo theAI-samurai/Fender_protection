@@ -4,7 +4,7 @@ filename        : data_validate.py
 Name            : Ankit Mishra
 Email           : ankitmishra723@gmail.com
 Date created    : Feb 28, 2021
-Date Modified   : Mar 05, 2021
+Date Modified   : Mar 10, 2021
 ---------------------------------------------------
 """
 
@@ -54,4 +54,6 @@ def active_streams_initialize(data):
 
 def height_width_validate():
     print('pass')
+
+
 
