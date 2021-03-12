@@ -35,3 +35,15 @@ while (True and ctr<10) or (vlc_player_object.is_playing() and ctr<100):
 vlc_player_object.pause()
 #vlc_player_object.release()
 del vlc_player_object
+
+
+# Method 3 ----------> using RTSP
+with rtsp.Client(rtsp_server_uri = stream3) as client:
+    ctr = 0
+    time.sleep(2)
+    while True and ctr < 20:
+        time.sleep(4)
+        _image = client.read(raw=True)
+        ctr+=1
+        print(type(_image))
+    #return _image

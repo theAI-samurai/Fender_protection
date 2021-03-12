@@ -19,9 +19,9 @@ def active_streams_initialize_vlc(data):
     active_lst = []
     for cp in lst:
         player = vlc.MediaPlayer(data[cp])
-        print(cp, player)
+        # print(cp, player)
         player.play()
-        time.sleep(1)
+        time.sleep(2)
         if player.is_playing():
             player.stop()
             player.release()
