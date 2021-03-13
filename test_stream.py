@@ -47,3 +47,15 @@ with rtsp.Client(rtsp_server_uri = stream3) as client:
         ctr+=1
         print(type(_image))
     #return _image
+
+import requests
+image_path = 'D:/darknet_fender_protection/vlc_stream.jpg'
+notification_url='http://localhost:3011/api/v1/notification/create'
+headers = {'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDQyMzA3ZDZhM2IyMjI2YjgyZmE0MmMiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MTUyODMyMTR9.FPv1C_AELB9UStxx-Jwj5Vax7OgRJr6Rr3sFPRxMa4M'}
+files = {'imageUrl': open(image_path, 'rb')}
+payload = {'title': "Dummy", 'status': 'threat',
+           'type': 'known',
+           'siteNumber': '4'}
+session = requests.Session()
+temp_ = session.post(notification_url, headers=headers, data=payload, files=files)
+print(temp_.status_code, temp_.json())
