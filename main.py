@@ -8,7 +8,7 @@ import math
 # validate Active Streams
 active_cameras = active_streams_initialize_vlc(all_camera_data)     # list of active camera ids
 # vlc_payer_object creation for active cameras
-vl_player_object = vlc_stream_object_init(act_cam_ids=active_cameras, conf_cam_data=all_camera_data)
+vlc_player_object = vlc_stream_object_init(act_cam_ids=active_cameras, conf_cam_data=all_camera_data)
 
 # get markup and snapshot images for active cameras
 for id in active_cameras:
@@ -33,7 +33,6 @@ for cam_ in active_cameras:    # active_cameras:
         # print(read)
         if read:
             frame_path = dir_of_file+'/ship/reference_files/'+str(cam_)+'.jpg'
-
             res = obj_detect.detect(frame_path.encode('ascii'))
             for i in range(len(res)):
                 cls, confi, coordi = res[i]
@@ -43,12 +42,14 @@ for cam_ in active_cameras:    # active_cameras:
                     image = cv2.imread(frame_path)
                     image = cv2.rectangle(image, (math.floor(xmi), math.floor(ymi)), (math.floor(xma), math.floor(yma)),(255, 255, 0), 2)
                     image = cv2.rectangle(image,(minx,miny),(maxx,maxy),(0,0,0),2)
-                    cv2.imshow('winname', image)
-                    cv2.waitKey(0)
-                    cv2.destroyAllWindows()
+                    #cv2.imshow('winname', image)
+                    #cv2.waitKey(0)
+                    #cv2.destroyAllWindows()
+                    save_detect_path = dir_of_file+'/ship/reference_files/detect_'+str(cam_)+'.jpg'
+                    cv2.imwrite(save_detect_path,image)
                     if overlap:
                         notification_trigger(cameraID=cam_, object=cls, status='Threat',
-                                             object_known='Known',image_path= frame_path)
+                                             object_known='Known',image_path=save_detect_path)
                     else:
                         print('Nothing detected')
 

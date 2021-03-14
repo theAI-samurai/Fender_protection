@@ -61,10 +61,12 @@ def notification_trigger(cameraID, object, status, object_known, image_path):
     RETURN : NONE
     ----------------------------------------------------------- """
 
-    headers = {'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDI3NjhkMjkyYjA2ODZlZWY1MTM5YjYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MTQxNzM4MDR9.cJZ_ghDmd34kx6SrM-7LJ7uy461yK-heIFV4THULt4w'}
-    payload = {'title': object, 'status': status, 'type': object_known, 'imageUrl': image_path, 'siteNumber': cameraID}
+    headers = {'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDQyMzA3ZDZhM2IyMjI2YjgyZmE0MmMiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MTUyODMyMTR9.FPv1C_AELB9UStxx-Jwj5Vax7OgRJr6Rr3sFPRxMa4M'}
+    payload = {'title': object, 'status': status,
+               'type': object_known, 'siteNumber': cameraID}
+    files = {'imageUrl': open(image_path, 'rb')}
     session = requests.Session()
-    session.post(notification_url, headers=headers, data=payload)
+    session.post(notification_url, headers=headers, data=payload,files=files)
 
 
 def save_image(pil_image, name_for_file, camera_id):
