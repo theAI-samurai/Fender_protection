@@ -89,3 +89,7 @@ def save_image(pil_image, name_for_file, camera_id):
     pil_image.save(ref_dir+name_for_file+'_'+str(camera_id)+'.jpg')
 
 
+def camera_active_status(data):
+    for cam_id in data:
+        cam_post = camera_status_url + str(cam_id)
+        requests.post(cam_post, data={'active': True})
