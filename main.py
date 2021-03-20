@@ -7,6 +7,10 @@ import math
 
 # validate Active Streams
 active_cameras = active_streams_initialize_vlc(all_camera_data)     # list of active camera ids
+
+# send camera status to frontend
+camera_active_status(active_cameras)
+
 # vlc_payer_object creation for active cameras
 vlc_player_object = vlc_stream_object_init(act_cam_ids=active_cameras, conf_cam_data=all_camera_data)
 
