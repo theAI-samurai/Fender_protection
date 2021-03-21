@@ -4,7 +4,7 @@ filename        : data_validate.py
 Name            : Ankit Mishra
 Email           : ankitmishra723@gmail.com
 Date created    : Feb 28, 2021
-Date Modified   : Mar 10, 2021
+Date Modified   : Mar 21, 2021
 ---------------------------------------------------
 """
 
@@ -12,11 +12,19 @@ from read_config import *
 import cv2
 import vlc
 import time
+import requests_handling
 
 
 def active_streams_initialize_vlc(data):
+    """ -------------------------------------------------------------------------
+    this function validate the IP streams that are Active / Inactive
+    Args:
+        data    : Dictionary containg {ID   : url} for all cameras fron config.txt
+    Return      : List of camera IDs that are Active and Inactive
+    -------------------------------------------------------------------------- """
     lst = dict.keys(data)
     active_lst = []
+    inactive_lst = []
     for cp in lst:
         player = vlc.MediaPlayer(data[cp])
         # print(cp, player)
@@ -26,8 +34,9 @@ def active_streams_initialize_vlc(data):
             player.stop()
             player.release()
             active_lst.append(cp)
-
-    return list(set(active_lst))
+        else:
+            inactive_lst.append(cp)
+    return list(set(active_lst)), list(set(inactive_lst))
 
 
 def active_streams_initialize(data):
