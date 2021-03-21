@@ -14,6 +14,7 @@ camera_active_status(active_cameras)
 # vlc_payer_object creation for active cameras
 vlc_player_object = vlc_stream_object_init(act_cam_ids=active_cameras, conf_cam_data=all_camera_data)
 
+
 # get markup and snapshot images for active cameras
 for id in active_cameras:
     get_markup_image(id)

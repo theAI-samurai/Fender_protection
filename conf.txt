@@ -1,5 +1,5 @@
 [camera_1]
-feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
+feeder_path = D:/darknet_fender_protection/ship/test_data/video21.mp4
 param_id = 4
 
 [camera_2]

@@ -92,5 +92,5 @@ def save_image(pil_image, name_for_file, camera_id):
 def camera_active_status(data):
     for cam_id in data:
         cam_post = camera_status_url + str(cam_id)
-        #print(cam_post)
-        requests.post(cam_post, data={'active': True})
+        print(cam_post)
+        requests.post(cam_post, data={'active': 1})
