@@ -34,7 +34,7 @@ for cam_ in active_cameras:    # active_cameras:
 
     while True:
         read = read_frames_using_vlc(player=vlc_player_object[cam_],  delay_time=1,
-                              cam_id=cam_, base_path=dir_of_file+'/ship/reference_files/')
+                                     cam_id=cam_, base_path=dir_of_file+'/ship/reference_files/')
         # print(read)
         if read:
             frame_path = dir_of_file+'/ship/reference_files/'+str(cam_)+'.jpg'

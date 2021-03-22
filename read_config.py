@@ -9,7 +9,7 @@ config = configparser.RawConfigParser()
 configFilePath = dir_of_file + '/conf.txt'
 config.readfp(open(configFilePath))
 
-all_camera_data = {}
+all_camera_data = {}            # saves ID : url , of cameras in a dictionary after reading from config file.
 
 # Resolution
 WIDTH = config.get('RESOLUTION', 'WIDTH')
