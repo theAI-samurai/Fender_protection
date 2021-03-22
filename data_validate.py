@@ -12,7 +12,7 @@ from read_config import *
 import cv2
 import vlc
 import time
-import requests_handling
+from requests_handling import *
 
 
 def active_streams_initialize_vlc(data):
@@ -34,8 +34,10 @@ def active_streams_initialize_vlc(data):
             player.stop()
             player.release()
             active_lst.append(cp)
+            camera_status_notification(cam_id=cp, status_code=1)    # sending notification to frontend for active Cam
         else:
             inactive_lst.append(cp)
+            camera_status_notification(cam_id=cp, status_code=0)  # sending notification to frontend for inactive Cam
     return list(set(active_lst)), list(set(inactive_lst))
 
 
