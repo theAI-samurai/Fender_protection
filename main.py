@@ -1,15 +1,20 @@
-from read_config import *
+
 from data_validate import *
 from requests_handling import *
 from darknet import *
 from image_codes import *
 import math
 
+VLC_PLAYER_OBJECT = {}
+
 # validate Active Streams
 active_cameras, inactive_cameras = active_streams_initialize_vlc(all_camera_data)     # list of active camera ids
 
 # vlc_payer_object creation for active cameras
-vlc_player_object = vlc_stream_object_init(act_cam_ids=active_cameras, conf_cam_data=all_camera_data)
+for act_cam_id in active_cameras:
+    temp_obj = vlc_stream_object_init_2(cam_id=act_cam_id, conf_cam_data=all_camera_data)
+    VLC_PLAYER_OBJECT.update({act_cam_id:temp_obj})
+    del temp_obj
 
 
 # get markup and snapshot images for active cameras
@@ -23,7 +28,7 @@ obj_detect = ObjectDetection(dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                              dir_of_file + '/ship/cfg/yolov3_full_ship_2000.weights',
                              dir_of_file + '/ship/cfg/ship.data'
                              )
-active_cameras = ['3']         # ----------> setting this for Testing pourpose only
+active_cameras = ['5']         # ----------> setting this for Testing pourpose only
 
 for cam_ in active_cameras:    # active_cameras:
     fender_image, minx, miny, maxx, maxy = fender_coordi(dir_of_file+'/ship/reference_files/markup_'+(cam_)+'.jpg')

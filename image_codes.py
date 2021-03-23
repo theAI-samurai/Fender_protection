@@ -19,7 +19,7 @@ stream2 = 'rtsp://192.168.29.73:8554/vlcc'
 
 def vlc_stream_object_init(act_cam_ids, conf_cam_data):
     """----------------------------------
-    This function takes as input the list of Active Cameras
+    This function takes as input the LIST of Active Cameras
     identified by the 'ACTIVE CAMERA INITIALIZE VLC in DataValidate.py'
     and returns VLC player objects for the active streams.
 
@@ -34,6 +34,25 @@ def vlc_stream_object_init(act_cam_ids, conf_cam_data):
     for cam in act_cam_ids:
         vlc_player_object.update({cam: vlc.MediaPlayer(conf_cam_data[cam])})
     return vlc_player_object
+
+
+def vlc_stream_object_init_2(cam_id, conf_cam_data):
+    """-------------------------------------------------------
+    This function takes as input Active Camera ID
+    identified by the 'ACTIVE CAMERA INITIALIZE VLC in DataValidate.py'
+    and returns VLC player objects for the Active ID passed as parameter.
+
+    (SAME AS ABOVE FUNC, but instead of LIST of Cam IDs, this fucntion
+     take 1 ID at a Time )
+    Args:
+        act_cam_ids     : Active Camera ID
+        conf_cam_data   : camera id and urls data from config file
+
+    Return:
+        vlc_player_object : VLC object for ID provided
+    -------------------------------------------------------- """
+    vlc_obj = vlc.MediaPlayer(conf_cam_data[cam_id])
+    return vlc_obj
 
 
 def read_frames_using_vlc(player, delay_time, cam_id, base_path):

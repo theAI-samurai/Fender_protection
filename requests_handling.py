@@ -36,11 +36,12 @@ def save_image(pil_image, name_for_file, camera_id):
 
 
 def get_markup_image(cameraID):
-    """ --------------
+    """ -------------------------------------------------------------
     this function fetches the markup image for the camera ID provided.
+    (Uses above 'save image' function to save image at location)
     ARGUMENT    : camera id
     RETURN      : markup_image
-    --------------- """
+    -------------------------------------------------------------- """
     markup_cam_1 = markup_base_url+str(cameraID)
     r = requests.get(markup_cam_1, stream=True).raw
     if r.status == 200:
@@ -87,37 +88,47 @@ def notification_trigger(cameraID, object, status, object_known, image_path):
                'type': object_known, 'siteNumber': cameraID}
     files = {'imageUrl': open(image_path, 'rb')}
     session = requests.Session()
-    session.post(notification_url, headers=headers, data=payload,files=files)
+    session.post(notification_url, headers=headers, data=payload, files=files)
 
 
-def camera_active_status(all_list, data):
+def camera_status_notification_all(all_list, data):
     """ ----------------------------------------------
-        this function passes data for camera status as active or not
-        to frontend.
+        this function POSTs notification to frontend for camera status
 
         ARGUMENT    :
-                    all_list : list of All camera IDs
-                    data     : list of active cameras IDs
+                    all_list : LIST of All camera IDs
+                    data     : LIST of active cameras IDs
         RETURN      : None
         ------------------------------------------- """
     false_cameras = np.setdiff1d(all_list, data)
     for cam_id in data:
         cam_post = camera_status_url + str(cam_id)
-        print(cam_post)
-        requests.post(cam_post, data={'active': 1})
+        try:
+            requests.post(cam_post, data={'active': 1})
+        except:
+            print('ERROR Post Notification for Camera ID : %(id)s' % {'id': cam_id})
+            print('NOTE: Potential Error on UI, Reload Application in Browser')
     for cam_id in false_cameras:
         cam_post = camera_status_url + str(cam_id)
-        print(cam_post)
-        requests.post(cam_post, data={'active': 0})
+        try:
+            requests.post(cam_post, data={'active': 0})
+        except:
+            print('ERROR Post Notification for Camera ID : %(id)s' % {'id': cam_id})
+            print('NOTE: Potential Error on UI, Reload Application in Browser')
 
 
 def camera_status_notification(cam_id, status_code):
     """ ---------------------------------------------------
     this function POSTs notification to frontend for camera status
-    cam_id      : ID of camera
+    (same as above, but takes individual camera_ids instead of list of cam id's)
+    cam_id      :   Camera ID
     status_code :   0 if camera is Inactive;
                     1 if camera is Active
     --------------------------------------------------- """
     cam_post = camera_status_url + str(cam_id)
-    requests.post(cam_post, data={'active': status_code})
+    try:
+        requests.post(cam_post, data={'active': status_code})
+    except:
+        print('ERROR Post Notification for Camera ID : %(id)s' % {'id': cam_id})
+        print('NOTE: Potential Error on UI, Reload Application in Browser')
 

@@ -8,7 +8,6 @@ Date Modified   : Mar 21, 2021
 ---------------------------------------------------
 """
 
-from read_config import *
 import cv2
 import vlc
 import time
@@ -50,6 +49,7 @@ def active_streams_initialize(data):
     # lst = [camera_path_1, camera_path_2]
     lst = dict.keys(data)
     active_lst = []
+    inactive_lst = []
     for cp in lst:
         ctr = 0
         cap = cv2.VideoCapture(data[cp])
@@ -58,9 +58,12 @@ def active_streams_initialize(data):
             if ret_ and ctr < 3:
                 ctr += 1
                 active_lst.append(cp)
+                camera_status_notification(cam_id=cp, status_code=1)  # sending notification to frontend for active Cam
             else:
-                break
-    return list(set(active_lst))
+                inactive_lst.append(cp)
+                camera_status_notification(cam_id=cp, status_code=1)  # sending notification to frontend for active Cam
+
+    return list(set(active_lst)), list(set(inactive_lst))
 
 
 def height_width_validate():
