@@ -43,14 +43,18 @@ def get_markup_image(cameraID):
     RETURN      : markup_image
     -------------------------------------------------------------- """
     markup_cam_1 = markup_base_url+str(cameraID)
-    r = requests.get(markup_cam_1, stream=True).raw
-    if r.status == 200:
-        img = Image.open(r).convert('RGB')
-        # img.save('fender.jpg')
-        save_image(img, name_for_file='markup',camera_id=cameraID)
-        return True
-    else:
-        return False
+    try:
+        r = requests.get(markup_cam_1, stream=True).raw
+        if r.status == 200:
+            img = Image.open(r).convert('RGB')
+            # img.save('fender.jpg')
+            save_image(img, name_for_file='markup',camera_id=cameraID)
+            return True
+        else:
+            return False
+    except:
+        print('ERROR Get Request for Camera ID : %(id)s' % {'id': cameraID})
+        print('NOTE: Potential Error on UI, Reload Application in Browser')
 
 
 def get_reference_snapshot_image(cameraID):
@@ -61,14 +65,18 @@ def get_reference_snapshot_image(cameraID):
     RETURN      : markup_image
     --------------- """
     ref_cam_1 = ref_base_url+str(cameraID)
-    r = requests.get(ref_cam_1, stream=True).raw
-    if r.status == 200:
-        img = Image.open(r).convert('RGB')
-        # img.save('fender.jpg')
-        save_image(img, name_for_file='fender', camera_id=cameraID)
-        return True
-    else:
-        return False
+    try:
+        r = requests.get(ref_cam_1, stream=True).raw
+        if r.status == 200:
+            img = Image.open(r).convert('RGB')
+            # img.save('fender.jpg')
+            save_image(img, name_for_file='fender', camera_id=cameraID)
+            return True
+        else:
+            return False
+    except:
+        print('ERROR Get Request for Camera ID : %(id)s' % {'id': cameraID})
+        print('NOTE: Potential Error on UI, Reload Application in Browser')
 
 
 def notification_trigger(cameraID, object, status, object_known, image_path):

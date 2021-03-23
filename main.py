@@ -17,12 +17,6 @@ for act_cam_id in active_cameras:
     del temp_obj
 
 
-# get markup and snapshot images for active cameras
-for id in active_cameras:
-    get_markup_image(id)
-    get_reference_snapshot_image(id)
-
-
 # loading Deeplearning model
 obj_detect = ObjectDetection(dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                              dir_of_file + '/ship/cfg/yolov3_full_ship_2000.weights',

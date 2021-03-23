@@ -34,6 +34,8 @@ def active_streams_initialize_vlc(data):
             player.release()
             active_lst.append(cp)
             camera_status_notification(cam_id=cp, status_code=1)    # sending notification to frontend for active Cam
+            get_markup_image(cp)                                    # Markup Image for Camera ID = cp
+            get_reference_snapshot_image(cp)                        # Reference Image for Cam ID = cp
         else:
             inactive_lst.append(cp)
             camera_status_notification(cam_id=cp, status_code=0)  # sending notification to frontend for inactive Cam
@@ -59,6 +61,8 @@ def active_streams_initialize(data):
                 ctr += 1
                 active_lst.append(cp)
                 camera_status_notification(cam_id=cp, status_code=1)  # sending notification to frontend for active Cam
+                get_markup_image(cp)  # Markup Image for Camera ID = cp
+                get_reference_snapshot_image(cp)  # Reference Image for Cam ID = cp
             else:
                 inactive_lst.append(cp)
                 camera_status_notification(cam_id=cp, status_code=1)  # sending notification to frontend for active Cam
