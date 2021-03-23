@@ -53,7 +53,7 @@ def get_markup_image(cameraID):
         else:
             return False
     except:
-        print('ERROR Get Request for Camera ID : %(id)s' % {'id': cameraID})
+        print('ERROR Get Request markup image for Camera ID : %(id)s' % {'id': cameraID})
         print('NOTE: Potential Error on UI, Reload Application in Browser')
 
 
@@ -75,7 +75,7 @@ def get_reference_snapshot_image(cameraID):
         else:
             return False
     except:
-        print('ERROR Get Request for Camera ID : %(id)s' % {'id': cameraID})
+        print('ERROR Get Request reference image for Camera ID : %(id)s' % {'id': cameraID})
         print('NOTE: Potential Error on UI, Reload Application in Browser')
 
 
@@ -114,7 +114,7 @@ def camera_status_notification_all(all_list, data):
         try:
             requests.post(cam_post, data={'active': 1})
         except:
-            print('ERROR Post Notification for Camera ID : %(id)s' % {'id': cam_id})
+            print('ERROR Post Notification camera status for Camera ID : %(id)s' % {'id': cam_id})
             print('NOTE: Potential Error on UI, Reload Application in Browser')
     for cam_id in false_cameras:
         cam_post = camera_status_url + str(cam_id)
