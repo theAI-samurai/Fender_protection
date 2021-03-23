@@ -216,21 +216,14 @@ network_predict_batch.argtypes = [c_void_p, IMAGE, c_int, c_int, c_int, c_float,
 network_predict_batch.restype = POINTER(DETNUMPAIR)
 
 
-def model_load(cfgPath, wgtPath):
-    net = load_net(cfgPath.encode('ascii'), wgtPath.encode('ascii'), 0)
-    # self.net_custom = load_net_custom(cfgPath.encode("ascii"), wgtPath.encode("ascii"), 0, 1)
-    return net
+class ObjectDetection:
 
-
-class ObjectDetection :
-    def __init__(self, dataPath, netwrk):
-        # self.net = load_net(cfgPath.encode('ascii'), wgtPath.encode('ascii'), 0)
+    def __init__(self, cfgPath, wgtPath, dataPath):
+        self.net = load_net(cfgPath.encode('ascii'), wgtPath.encode('ascii'), 0)
         # self.net_custom = load_net_custom(cfgPath.encode("ascii"), wgtPath.encode("ascii"), 0, 1)
-        self.net = netwrk
         self.meta = load_meta(dataPath.encode('ascii'))
         self.class_names = [self.meta.names[i].decode("ascii") for i in range(self.meta.classes)]
         self.colors = class_colors(self.class_names)
-
 
     def network_height_width(self):
         w = lib.network_width(self.net)
