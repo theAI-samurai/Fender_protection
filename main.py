@@ -34,7 +34,7 @@ for cam_ in active_cameras:    # active_cameras:
     # fender_image = cv2.circle(fender_image, (minx,miny), radius=5, color=(255, 0, 255), thickness=3)
 
     while True:
-        read = read_frames_using_vlc(player=vlc_player_object[cam_],  delay_time=1,
+        read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_],  delay_time=1,
                                      cam_id=cam_, base_path=dir_of_file+'/ship/reference_files/')
         # print(read)
         if read:
