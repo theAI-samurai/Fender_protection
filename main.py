@@ -6,6 +6,8 @@ from image_codes import *
 import math
 import threading
 
+
+
 VLC_PLAYER_OBJECT = {}
 
 # validate Active Streams
@@ -14,19 +16,16 @@ active_cameras, inactive_cameras = active_streams_initialize_vlc(all_camera_data
 # vlc_payer_object creation for active cameras
 for act_cam_id in active_cameras:
     temp_obj = vlc_stream_object_init_2(cam_id=act_cam_id, conf_cam_data=all_camera_data)
-    VLC_PLAYER_OBJECT.update({act_cam_id:temp_obj})
+    VLC_PLAYER_OBJECT.update({act_cam_id: temp_obj})
     del temp_obj
 
 # model_initialize
 net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                  wgtPath=dir_of_file + '/ship/cfg/yolov3_full_ship_2000.weights')
 
-print(type(net))
 
 # loading Deeplearning model
-obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data',
-                             netwrk=net
-                             )
+obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net)
 active_cameras = ['5']         # ----------> setting this for Testing pourpose only
 
 for cam_ in active_cameras:    # active_cameras:
@@ -39,18 +38,19 @@ for cam_ in active_cameras:    # active_cameras:
         # print(read)
         if read:
             frame_path = dir_of_file+'/ship/reference_files/'+str(cam_)+'.jpg'
-            res = obj_detect.detect(frame_path.encode('ascii'))
+            markup_img_pa = dir_of_file+'/ship/reference_files/markup_'+str(cam_)+'.jpg'
+            new_dim = height_width_validate(markup_img_pa, markup_img_pa)
+            markup_img = cv2.resize(cv2.imread(frame_path), new_dim)
+            res = obj_detect.detect(frame_path.encode('ascii'))   # calling detection on the saved snapshot
             for i in range(len(res)):
                 cls, confi, coordi = res[i]
                 if cls == b'boat':
-                    xmi, ymi, xma, yma = bbox2points(coordi)
+                    xmi, ymi, xma, yma = bbox2points(coordi)        # coordinate of object in image
                     overlap = check_for_overlap(xmi, ymi, xma, yma, minx, miny, maxx, maxy)
-                    image = cv2.imread(frame_path)
+                    image = cv2.resize(cv2.imread(frame_path), new_dim)                # snapshot image file read
                     image = cv2.rectangle(image, (math.floor(xmi), math.floor(ymi)), (math.floor(xma), math.floor(yma)),(255, 255, 0), 2)
                     image = cv2.rectangle(image,(minx,miny),(maxx,maxy),(0,0,0),2)
-                    #cv2.imshow('winname', image)
-                    #cv2.waitKey(0)
-                    #cv2.destroyAllWindows()
+                    image = cv2.addWeighted(image, 1, markup_img, 1, 0)
                     save_detect_path = dir_of_file+'/ship/reference_files/detect_'+str(cam_)+'.jpg'
                     cv2.imwrite(save_detect_path,image)
                     if overlap:

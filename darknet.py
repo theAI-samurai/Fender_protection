@@ -223,13 +223,14 @@ def model_load(cfgPath, wgtPath):
 
 
 class ObjectDetection :
-    def __init__(self, dataPath, netwrk):
+    def __init__(self, dataPath, netwrk, camID):
         # self.net = load_net(cfgPath.encode('ascii'), wgtPath.encode('ascii'), 0)
         # self.net_custom = load_net_custom(cfgPath.encode("ascii"), wgtPath.encode("ascii"), 0, 1)
         self.net = netwrk
         self.meta = load_meta(dataPath.encode('ascii'))
         self.class_names = [self.meta.names[i].decode("ascii") for i in range(self.meta.classes)]
         self.colors = class_colors(self.class_names)
+        self.cam_id = camID
 
 
     def network_height_width(self):

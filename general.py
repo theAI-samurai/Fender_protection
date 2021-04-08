@@ -42,3 +42,42 @@ while cap.isOpened():
         ctr = ctr+1
     else:
         break
+
+# overlay of markup image on frame captured TEST
+import cv2
+main_img = cv2.resize(cv2.imread(r'D:\darknet_fender_protection\ship\reference_files\5.jpg'),(960,540))
+markup_image = cv2.resize(cv2.imread(r'D:\darknet_fender_protection\ship\reference_files\markup_5.jpg'),(960,540))
+print(main_img.shape, markup_image.shape)
+dst = cv2.addWeighted(main_img, 1, markup_image, 1, 0)
+cv2.imshow('winname', dst)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+# height width validate
+
+from data_validate import *
+import cv2
+
+main_img = r'D:\darknet_fender_protection\ship\reference_files\5.jpg'
+markup_image = r'D:\darknet_fender_protection\ship\reference_files\markup_5.jpg'
+
+height_width_validate(main_img, markup_image)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

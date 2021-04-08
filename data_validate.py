@@ -70,8 +70,28 @@ def active_streams_initialize(data):
     return list(set(active_lst)), list(set(inactive_lst))
 
 
-def height_width_validate():
-    print('pass')
+def height_width_validate(snap_img_path, markup_img_path):
+    snap = cv2.imread(snap_img_path)            # w = 960, H=576  print.shape = 576,960
+    mark = cv2.imread(markup_img_path)          # w = 960, H=540  print.shape = 540,960
+
+    lst = []
+    if snap.shape[1] == mark.shape[1]:
+        lst.append(snap.shape[1])
+    elif snap.shape[1] < mark.shape[1]:
+        lst.append(snap.shape[1])
+    else:
+        lst.append(mark.shape[1])
+
+    if snap.shape[0] == mark.shape[0]:
+        lst.append(snap.shape[0])
+    elif snap.shape[0] < mark.shape[0]:
+        lst.append(snap.shape[0])
+    else:
+        lst.append(mark.shape[0])
+    new_dimension = tuple(lst)
+    return new_dimension
+
+
 
 
 

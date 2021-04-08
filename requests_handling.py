@@ -47,7 +47,6 @@ def get_markup_image(cameraID):
         r = requests.get(markup_cam_1, stream=True).raw
         if r.status == 200:
             img = Image.open(r).convert('RGB')
-            # img.save('fender.jpg')
             save_image(img, name_for_file='markup',camera_id=cameraID)
             return True
         else:
@@ -69,7 +68,6 @@ def get_reference_snapshot_image(cameraID):
         r = requests.get(ref_cam_1, stream=True).raw
         if r.status == 200:
             img = Image.open(r).convert('RGB')
-            # img.save('fender.jpg')
             save_image(img, name_for_file='fender', camera_id=cameraID)
             return True
         else:
