@@ -79,7 +79,49 @@ new_frame = r'D:\darknet_fender_protection\ship\reference_files\5.jpg'
 
 
 
+# ------------------------------------- RED MARKUP TEST -----------------
 
+import cv2
+
+markup = r'D:\darknet_fender_protection\ship\reference_files\markup_5.jpg'
+boat = r'D:\darknet_fender_protection\ship\reference_files\detect_5.jpg'
+
+bat = cv2.imread(boat)
+mrk = cv2.imread(markup)
+
+c1 = (184, 332)  # --> 184:W, 332:H in a image where W = 960, H = 540------- to access img[H,W]
+c2 = (447, 497)     # (W,H)
+c3 = (447,332)
+c4 = (184,497)
+
+bat = cv2.circle(bat, c1, radius=1, color=(0, 0, 255), thickness=4)  # (w,h)
+bat = cv2.circle(bat, c2, radius=1, color=(0, 0, 255), thickness=4)
+bat = cv2.circle(bat, c3, radius=1, color=(0, 0, 255), thickness=4)
+bat = cv2.circle(bat, c4, radius=1, color=(0, 0, 255), thickness=4)
+
+
+def list_marking_coord(mark_img):
+    lst = []
+    for i in range(mark_img.shape[0]):       # H
+        for j in range(mark_img.shape[1]):   # W
+            if mark_img[i, j, 2] > 150:
+                lst.append((j,i))       # (W,H)
+    return lst
+
+
+lst = list_marking_coord(mrk)
+
+
+def overlap_from_left_red_markup(cord_lst, top_right):
+    for iter, tup in enumerate(cord_lst):
+        w = tup[0]
+        h = tup[1]
+        W = top_right[0]
+        H = top_right[1]
+        if w in range(W-130, W+20) and h in range(H-15, H+15):
+            print('OVERLAP FROM LEFT')
+            break
+        return True
 
 
 
