@@ -106,8 +106,8 @@ def overlap_from_left_red_markup(cord_lst, top_right):
         H = top_right[1]
         if w in range(W-130, W+20) and h in range(H-15, H+15):
             print('OVERLAP FROM LEFT')
-            break
-        return True
+            return True
+
 
 
 def list_marking_coord(mark_img):
