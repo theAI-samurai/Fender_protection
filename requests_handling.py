@@ -47,7 +47,7 @@ def get_markup_image(cameraID):
         r = requests.get(markup_cam_1, stream=True).raw
         if r.status == 200:
             img = Image.open(r).convert('RGB')
-            save_image(img, name_for_file='markup',camera_id=cameraID)
+            save_image(img, name_for_file='markup', camera_id=cameraID)
             return True
         else:
             return False
@@ -94,7 +94,10 @@ def notification_trigger(cameraID, object, status, object_known, image_path):
                'type': object_known, 'siteNumber': cameraID}
     files = {'imageUrl': open(image_path, 'rb')}
     session = requests.Session()
-    session.post(notification_url, headers=headers, data=payload, files=files)
+    try:
+        session.post(notification_url, headers=headers, data=payload, files=files)
+    except:
+        print('ERROR : Post notification url failed for cameraID : ' + str(cameraID))
 
 
 def camera_status_notification_all(all_list, data):

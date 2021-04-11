@@ -109,7 +109,6 @@ def overlap_from_left_red_markup(cord_lst, top_right):
             return True
 
 
-
 def list_marking_coord(mark_img):
     lst = []
     for i in range(mark_img.shape[0]):       # H
