@@ -48,8 +48,10 @@ import cv2
 main_img = cv2.resize(cv2.imread(r'D:\darknet_fender_protection\ship\reference_files\5.jpg'),(960,540))
 markup_image = cv2.resize(cv2.imread(r'D:\darknet_fender_protection\ship\reference_files\markup_5.jpg'),(960,540))
 print(main_img.shape, markup_image.shape)
-dst = cv2.addWeighted(main_img, 1, markup_image, 1, 0)
-cv2.imshow('winname', dst)
+main_img = cv2.addWeighted(main_img, 1, markup_image, 1, 0)
+save_detect_path = r'D:\darknet_fender_protection/ship/reference_files/detect_5'+'.jpg'
+cv2.imwrite(save_detect_path, main_img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -64,6 +66,20 @@ main_img = r'D:\darknet_fender_protection\ship\reference_files\5.jpg'
 markup_image = r'D:\darknet_fender_protection\ship\reference_files\markup_5.jpg'
 
 height_width_validate(main_img, markup_image)
+
+# ----------baground subtraction
+import cv2
+
+backSub_1 = cv2.createBackgroundSubtractorMOG2()
+backSub_2 = cv2.createBackgroundSubtractorKNN()
+
+
+ref_frame_path = r'D:\darknet_fender_protection\ship\reference_files\fender_8.jpg'
+new_frame = r'D:\darknet_fender_protection\ship\reference_files\5.jpg'
+
+
+
+
 
 
 

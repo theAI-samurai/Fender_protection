@@ -98,6 +98,27 @@ def check_for_overlap(rec1_x1, rec1_y1, rec1_x2, rec1_y2, rec2_x1, rec2_y1, rec2
         return False
 
 
+def overlap_from_left_red_markup(cord_lst, top_right):
+    for iter, tup in enumerate(cord_lst):
+        w = tup[0]
+        h = tup[1]
+        W = top_right[0]
+        H = top_right[1]
+        if w in range(W-130, W+20) and h in range(H-15, H+15):
+            print('OVERLAP FROM LEFT')
+            break
+        return True
+
+
+def list_marking_coord(mark_img):
+    lst = []
+    for i in range(mark_img.shape[0]):       # H
+        for j in range(mark_img.shape[1]):   # W
+            if mark_img[i, j, 2] > 150:
+                lst.append((j,i))       # (W,H)
+    return lst
+
+
 def read_frames_rtsp_lib(url, obj_client):
     #with rtsp.Client(rtsp_server_uri = url) as client:
     time.sleep(2)
