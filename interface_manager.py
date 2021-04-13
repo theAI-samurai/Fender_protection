@@ -70,7 +70,7 @@ def main_program(cam_, cam_url):
                             active_cams.remove(cam_)            # delete cameraID from Active cam list
                             del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
                             restart_status = True               # Status : True to reacquire objects for camID
-
+                            camera_status_notification(cam_id=cam_, status_code=0)      # notification trigger to add
 
 
 

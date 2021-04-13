@@ -58,7 +58,7 @@ def active_stream_initialize_vlc(cp, url):
     if player.is_playing():
         player.stop()
         player.release()
-        camera_status_notification(cam_id=cp, status_code=1)    # sending notification to frontend for active Cam
+        camera_status_notification(cam_id=cp, status_code=1)          # sending notification to frontend for active Cam
         mrk = get_markup_image(cp)                                    # Markup Image for Camera ID = cp
         ref = get_reference_snapshot_image(cp)                        # Reference Image for Cam ID = cp
         if mrk and ref:
@@ -66,7 +66,7 @@ def active_stream_initialize_vlc(cp, url):
         else:
             return False
     else:
-        camera_status_notification(cam_id=cp, status_code=0)  # sending notification to frontend for inactive Cam
+        camera_status_notification(cam_id=cp, status_code=0)        # sending notification to frontend for inactive Cam
         return False
 
 

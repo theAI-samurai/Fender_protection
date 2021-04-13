@@ -83,8 +83,8 @@ new_frame = r'D:\darknet_fender_protection\ship\reference_files\5.jpg'
 
 import cv2
 
-markup = r'D:\darknet_fender_protection\ship\reference_files\markup_5.jpg'
-boat = r'D:\darknet_fender_protection\ship\reference_files\detect_5.jpg'
+markup = r'D:\darknet_fender_protection\ship\reference_files\markup_9.jpg'
+boat = r'D:\darknet_fender_protection\ship\reference_files\detect_9.jpg'
 
 bat = cv2.imread(boat)
 mrk = cv2.imread(markup)
