@@ -232,7 +232,6 @@ class ObjectDetection :
         self.colors = class_colors(self.class_names)
         self.cam_id = camID
 
-
     def network_height_width(self):
         w = lib.network_width(self.net)
         h = lib.network_height(self.net)

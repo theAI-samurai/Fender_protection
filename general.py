@@ -124,8 +124,23 @@ def overlap_from_left_red_markup(cord_lst, top_right):
         return True
 
 
+#
+import requests
+from read_config import *
+from PIL import Image
+import cv2
 
-
+markup_cam_1 = markup_base_url+str(5)
+for i in range(6):
+    try:
+        r = requests.get(markup_cam_1, stream=True).raw
+    except:
+        r=0
+    print(r.status)
+    i+=1
+    if r.status ==200:
+        img = Image.open(r).convert('RGB')
+        img.save('D:/darknet_fender_protection/ship/reference_files/test'+str(i)+'.jpg')
 
 
 

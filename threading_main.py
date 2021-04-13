@@ -1,19 +1,16 @@
-from main import *
+from interface_manager import *
 import threading
 
-threads_opened = []
+thread = []
 
-for cams in active_cameras:
-    threads_opened.append(threading.Thread(target=main_program, args=(cams,)))
-    threads_opened[-1].start()
+# '''
+for e in all_camera_data.keys():
+    thread.append(threading.Thread(target=main_program, args=(e, all_camera_data[e])))
+    thread[-1].start()
 
-
-for t in threads_opened:
-    t.join()
-
-
-
-
+for item in thread:
+    item.join()
+# '''
 
 
 

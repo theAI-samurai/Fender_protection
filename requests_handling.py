@@ -40,41 +40,51 @@ def get_markup_image(cameraID):
     this function fetches the markup image for the camera ID provided.
     (Uses above 'save image' function to save image at location)
     ARGUMENT    : camera id
-    RETURN      : markup_image
+    RETURN      : if FETCHED/EXISTS : True , else: False/0
     -------------------------------------------------------------- """
     markup_cam_1 = markup_base_url+str(cameraID)
-    try:
-        r = requests.get(markup_cam_1, stream=True).raw
-        if r.status == 200:
-            img = Image.open(r).convert('RGB')
-            save_image(img, name_for_file='markup', camera_id=cameraID)
-            return True
-        else:
-            return False
-    except:
-        print('ERROR Get Request markup image for Camera ID : %(id)s' % {'id': cameraID})
-        print('NOTE: Potential Error on UI, Reload Application in Browser')
+    file_name = dir_of_file + '/ship/reference_files/markup_'+str(cameraID)+'.jpg'
+    if os.path.isfile(file_name):
+        # if File Exists no need to fetch
+        return True
+    else:
+        try:
+            r = requests.get(markup_cam_1, stream=True).raw
+            if r.status == 200:
+                img = Image.open(r).convert('RGB')
+                save_image(img, name_for_file='markup', camera_id=cameraID)
+                return True
+            else:
+                return False
+        except:
+            print('ERROR  GET Request FAILED for markup image for Camera ID : %(id)s' % {'id': cameraID})
+            return 0
 
 
 def get_reference_snapshot_image(cameraID):
-    """ --------------
+    """ ----------------------------------------------------------------
     this function fetches the Snapshot image for the camera ID provided.
-
+    (Uses above 'save image' function to save image at location)
     ARGUMENT    : camera id
-    RETURN      : markup_image
-    --------------- """
+    RETURN      : if FETCHED/EXISTS : True , else: False/0
+    ---------------------------------------------------------------- """
     ref_cam_1 = ref_base_url+str(cameraID)
-    try:
-        r = requests.get(ref_cam_1, stream=True).raw
-        if r.status == 200:
-            img = Image.open(r).convert('RGB')
-            save_image(img, name_for_file='fender', camera_id=cameraID)
-            return True
-        else:
-            return False
-    except:
-        print('ERROR Get Request reference image for Camera ID : %(id)s' % {'id': cameraID})
-        print('NOTE: Potential Error on UI, Reload Application in Browser')
+    file_name = dir_of_file + '/ship/reference_files/fender_' + str(cameraID) + '.jpg'
+    if os.path.isfile(file_name):
+        # if File Exists no need to fetch
+        return True
+    else:
+        try:
+            r = requests.get(ref_cam_1, stream=True).raw
+            if r.status == 200:
+                img = Image.open(r).convert('RGB')
+                save_image(img, name_for_file='fender', camera_id=cameraID)
+                return True
+            else:
+                return False
+        except:
+            print('ERROR GET Request FAILED for reference image for Camera ID : %(id)s' % {'id': cameraID})
+            return 0
 
 
 def notification_trigger(cameraID, object, status, object_known, image_path):
@@ -138,6 +148,5 @@ def camera_status_notification(cam_id, status_code):
     try:
         requests.post(cam_post, data={'active': status_code})
     except:
-        print('ERROR Post Notification for Camera ID : %(id)s' % {'id': cam_id})
-        print('NOTE: Potential Error on UI, Reload Application in Browser')
+        print('ERROR POST camStatus Notification FAILED for Camera ID : %(id)s' % {'id': cam_id})
 

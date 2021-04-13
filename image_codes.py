@@ -4,7 +4,7 @@ filename        : data_validate.py
 Name            : Ankit Mishra
 Email           : ankitmishra723@gmail.com
 Date created    : Feb 28, 2021
-Date Modified   : Mar 10, 2021
+Date Modified   : APR 13, 2021
 ---------------------------------------------------
 """
 
@@ -55,7 +55,24 @@ def vlc_stream_object_init_2(cam_id, conf_cam_data):
     return vlc_obj
 
 
+def vlc_stream_object_init_3(url):
+    """-------------------------------------------------------
+    This function takes URL as argument and returns VLC OBJECT.
+
+    (SAME AS ABOVE FUNC, but instead of LIST of Active cams and DIct data , this fucntion
+     take just the URL )
+    Args:
+        URL :  URL of camera to create VLC_object
+
+    Return:
+        vlc_player_object : VLC object for ID provided
+    -------------------------------------------------------- """
+    vlc_obj = vlc.MediaPlayer(url)
+    return vlc_obj
+
+
 def read_frames_using_vlc(player, delay_time, cam_id, base_path):
+    
     player.play()  # --> play
     if player.is_playing():
         time.sleep(delay_time)
@@ -66,7 +83,14 @@ def read_frames_using_vlc(player, delay_time, cam_id, base_path):
 
 
 def fender_coordi(path_):
-    print('Fender_Reference_image ', path_)
+    """-----------------------------------------------------
+    this function calculates the (X_min,Y_min) and (X_max, Y_max)
+    coordinates of the freehand MARKUP image
+    ARGUMENTS:
+        path : IMAGE file Path to the MArkup image
+
+    RETURN : MAT format Image, of markup, x1,y1,x2,y2
+    ------------------------------------------------------"""
     fender_ref = cv2.imread(path_)  # ---> H=400, W=500
     lst_x = []
     lst_y = []
@@ -80,8 +104,6 @@ def fender_coordi(path_):
     min_y = min(lst_y)
     max_y = max(lst_y)
 
-    # fender_ref = cv2.circle(fender_ref, (min_x,min_y), radius=5, color=(255, 0, 255), thickness=3)
-    # fender_ref = cv2.circle(fender_ref, (max_x,max_y), radius=5, color=(156, 0, 167), thickness=3)
     return fender_ref, min_x,min_y, max_x, max_y
 
 

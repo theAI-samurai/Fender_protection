@@ -52,6 +52,7 @@ markup_base_url = config.get('GET_POST_URL', 'markup')
 ref_base_url = config.get('GET_POST_URL', 'ref')
 camera_status_url = config.get('GET_POST_URL', 'cam_active_status')
 
+del(config, configFilePath)
 
 
 
