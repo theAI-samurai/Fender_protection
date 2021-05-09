@@ -82,49 +82,62 @@ new_frame = r'D:\darknet_fender_protection\ship\reference_files\5.jpg'
 # ------------------------------------- RED MARKUP TEST -----------------
 
 import cv2
+from data_validate import *
+from image_codes import *
 
+# STEP 1 : Read makrup image and get  top-Left and bottom right coorinates  to draw Rectangle of markup
+# STEP 2: read boat image
+# STEP 3:  Find right resolution size and Resize image
+# STEP 4: Overlap markup on Boat image
+# Step 5: Draw rectangle of MArkup image
+# STEP 6: Rectangle of Boat coordinats
+# -------- checking overlap ---------------
+# STEP 7:
 markup = r'D:\darknet_fender_protection\ship\reference_files\markup_9.jpg'
-boat = r'D:\darknet_fender_protection\ship\reference_files\detect_9.jpg'
+fender_markup_image, minx, miny, maxx, maxy = fender_coordi(markup)
+boat = r'D:\darknet_fender_protection\ship\reference_files\4.jpg'
 
-bat = cv2.imread(boat)
-mrk = cv2.imread(markup)
+newdim = height_width_validate(boat, markup)
 
-c1 = (184, 332)  # --> 184:W, 332:H in a image where W = 960, H = 540------- to access img[H,W]
-c2 = (447, 497)     # (W,H)
-c3 = (447,332)
-c4 = (184,497)
+bat = cv2.resize(cv2.imread(boat), newdim)          # boat
+mrk = cv2.resize(fender_markup_image, newdim)       # markup
 
-bat = cv2.circle(bat, c1, radius=1, color=(0, 0, 255), thickness=4)  # (w,h)
-bat = cv2.circle(bat, c2, radius=1, color=(0, 0, 255), thickness=4)
-bat = cv2.circle(bat, c3, radius=1, color=(0, 0, 255), thickness=4)
-bat = cv2.circle(bat, c4, radius=1, color=(0, 0, 255), thickness=4)
+image_ = cv2.addWeighted(bat, 1, mrk, 1, 0)
+image_ = cv2.rectangle(image_, (minx, miny), (maxx, maxy), (0, 0, 0), 2)
+c1 = (189, 269)  # --> 189:W, 269:H in a image where W = 960, H = 540------- to access img[H,W]
+c2 = (504, 500)     # (W,H)
+c3 = (504, 269)
+c4 = (189, 500)
 
+image_ = cv2.rectangle(image_, c1, c2, (0, 255, 0), 2)
 
-def list_marking_coord(mark_img):
-    lst = []
-    for i in range(mark_img.shape[0]):       # H
-        for j in range(mark_img.shape[1]):   # W
-            if mark_img[i, j, 2] > 150:
-                lst.append((j,i))       # (W,H)
-    return lst
+image_ = cv2.circle(image_, c1, radius=1, color=(255, 0, 255), thickness=4)  # (w,h)
+image_ = cv2.circle(image_, c2, radius=1, color=(255, 0, 255), thickness=4)
+image_ = cv2.circle(image_, c3, radius=1, color=(255, 0, 255), thickness=4)
+image_ = cv2.circle(image_, c4, radius=1, color=(255, 0, 255), thickness=4)
 
+#cv2.imshow('jfbf', image_)
+#cv2.waitKey(0)
+#cv2.destroyAllWindows()
+
+#cv2.imwrite(r'D:\darknet_fender_protection\ship\reference_files\overlaped.jpg',image_)
 
 lst = list_marking_coord(mrk)
 
+for iter, tup in enumerate(lst):
+    w = tup[0]
+    h = tup[1]
+    W = c3[0]
+    H = c3[1]
+    if w in range(W - 130, W + 20) and h in range(H - 15, H + 15):
+        image_ = cv2.circle(image_, (w,h), radius=1, color=(255, 0, 255), thickness=4)  # (w,h)
+        cv2.imshow('jfbf', image_)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
-def overlap_from_left_red_markup(cord_lst, top_right):
-    for iter, tup in enumerate(cord_lst):
-        w = tup[0]
-        h = tup[1]
-        W = top_right[0]
-        H = top_right[1]
-        if w in range(W-130, W+20) and h in range(H-15, H+15):
-            print('OVERLAP FROM LEFT')
-            break
-        return True
 
 
-#
+# ---------------------------------------------------------------------
 import requests
 from read_config import *
 from PIL import Image
@@ -144,6 +157,153 @@ for i in range(6):
 
 
 
+
+import cv2
+import os
+import pathlib
+
+path = r'D:\darknet_fender_protection\ship\test_data'
+markup = r'D:\darknet_fender_protection\ship\reference_files\markup_9.jpg'
+mark = cv2.imread(markup)
+#"""
+if os.path.exists(path + '/out'):
+    pass
+else:
+    os.mkdir(path + '/out', mode=0o777)
+#"""
+out_path = path +'/out/'
+ctr = 0
+
+#"""
+cap = cv2.VideoCapture(path+'/video2.mp4')
+while cap.isOpened():
+    ret, img = cap.read()
+    try:
+        img = cv2.resize(img,(960,540))
+        cv2.imwrite(out_path+str(ctr)+'.jpg', img)
+    except:
+        break
+    ctr +=1
+#"""
+
+# ------------------------------------------ BACKGROUND SUBTRACTION ------------------------
+
+import cv2
+import numpy as np
+path = r'D:\darknet_fender_protection\ship\test_data'
+detect_coor_1 = (125, 295)
+detect_coor_4 = (400, 435)
+
+cap = cv2.VideoCapture(path+'/video2.mp4')
+fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
+#fgbg2 = cv2.createBackgroundSubtractorMOG2()
+#fgbg3 = cv2.bgsegm.createBackgroundSubtractorGMG()
+
+ctr = 0
+while(cap.isOpened()):# and ctr<2:
+#if ctr < 2:
+    # read frames
+    ret, img = cap.read()
+    fgmask1 = fgbg1.apply(img)
+    fgmask1 = cv2.rectangle(fgmask1, detect_coor_1, detect_coor_4, (0, 0, 0), -1)  # masking the detected coordinate
+    #edge = cv2.Canny(fgmask1, 10, 150)
+    #print(edge.shape, fgmask1.shape)
+    cont, _ = cv2.findContours(fgmask1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    ctr+=1
+    #print(len(cont))
+    for e in cont:
+        area = cv2.contourArea(e)
+        if area > 7000:
+            print(area)
+            cv2.drawContours(img, cont, -1, (0, 255, 0), 0)
+    cv2.imshow('Original', img)
+    cv2.imshow('MOG', fgmask1)
+    #cv2.imshow('edge', edge)
+
+    k = cv2.waitKey(30) & 0xff
+    if k == 27:
+        break
+cap.release()
+cv2.destroyAllWindows()
+
+# ------------------------------------------- SUBTRACTION ---------------------------------
+import cv2
+import numpy as np
+import os
+
+detect_coor_1 = (125, 295)
+detect_coor_2 = (125, 435)
+detect_coor_3 = (400, 295)
+detect_coor_4 = (400, 435)
+
+path = r'D:\darknet_fender_protection\ship\test_data'
+markup = r'D:\darknet_fender_protection\ship\reference_files\markup_9.jpg'
+makrup_n = r'D:\darknet_fender_protection\ship\reference_files\markup_9_up.jpg'
+out_path = path +'/out/'
+src1 = None
+ctr = 0                 # to set reference file
+
+mark = cv2.imread(markup)
+test = cv2.imread(makrup_n)
+
+
+def mask_fender(img_m, markup_img):
+    new_lst = []
+    mark_2d_ = markup_img[:, :, 0]              # 3D to 2D image conversion
+    for j in range(mark_2d_.shape[0]):           # H but rows of image
+        i_start_ = 0
+        i_end_ = 0
+        if np.all((mark_2d_[j, :] == 0)):       # check if all row values are zero
+            pass
+        else:
+            f_s = False
+            f_e = False
+            for i in range(mark_2d_.shape[1]):       # W but cols of image
+                if mark_2d_[j, i] != 0 and mark_2d_[j, i+5] == 0 and f_s==False:
+                    i_start_ = i
+                    f_s = True
+
+            for k in range(mark_2d_.shape[1]-1, i_start_, -1):
+                if mark_2d_[j, k] > 0 and mark_2d_[j, k - 5] == 0 and f_e == False:
+                    i_end_ = k
+                    f_e = True
+        if i_end_ != 0 and i_start_ != 0:
+            new_lst.append((j, i_start_, i_end_))
+    for i in new_lst:
+        j = i[0]
+        for k in range(i[1], i[2]):
+            img_m[j, k, :] = [0, 0, 0]                 # mask as black
+    return img_m
+
+
+for file in os.listdir(out_path):
+    if ctr == 0:
+        src1 = cv2.imread(out_path+file)
+        ctr = ctr+1
+    else:
+        src2 = cv2.imread(out_path+file)
+        dst = src2 - src1
+        dtype = -1
+        sub = cv2.subtract(src2, src1, dst)
+        sub = cv2.rectangle(sub, detect_coor_1, detect_coor_4, (0, 0, 0), -1)   # masking the detected coordinate
+        gray = cv2.cvtColor(sub,cv2.COLOR_BGR2GRAY)
+        edge = cv2.Canny(gray, 10,150)
+        #cont, _ = cv2.findContours(cv2.cvtColor(sub,cv2.COLOR_BGR2GRAY), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        #cv2.drawContours(sub, cont, 0, (0,255,0), -1)
+        #sub = mask_fender(sub, mark)
+        cv2.imwrite(out_path +str(ctr)+'new.jpg', edge)
+        cv2.imwrite(out_path + str(ctr)+'_new.jpg', sub)
+        ctr=ctr+1
+
+
+path = "D:/darknet_fender_protection/ship/test_data/2_dst_2_1_sub_2_1/"
+
+##
+#makr_n = cv2.cvtColor(cv2.imread(makrup_n), cv2.COLOR_BGR2GRAY)
+#cont, _ = cv2.findContours(makr_n, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#cv2.drawContours(test, cont, 0, (0,255,0), -1)
+#cv2.fillPoly(test,cont,(255,255,255))
+#cv2.imwrite(path +'/contours.jpg', test)
 
 
 

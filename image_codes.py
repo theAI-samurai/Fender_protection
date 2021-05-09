@@ -126,12 +126,20 @@ def overlap_from_left_red_markup(cord_lst, top_right):
         h = tup[1]
         W = top_right[0]
         H = top_right[1]
-        if w in range(W-130, W+20) and h in range(H-15, H+15):
+        if w in range(W-30, W+20) and h in range(H-15, H+15):
             print('OVERLAP FROM LEFT')
             return True
 
 
 def list_marking_coord(mark_img):
+    """-----------------------------------------
+
+    Args:
+        mark_img: markup image to get list of coordinates for hand markup
+
+    Returns: A list containg tuples in format (W, H) cordinates
+
+    -----------------------------------------"""
     lst = []
     for i in range(mark_img.shape[0]):       # H
         for j in range(mark_img.shape[1]):   # W
