@@ -3,6 +3,7 @@
 import cv2
 from ctypes import *
 import random
+import os
 
 
 def sample(probs):
@@ -127,7 +128,18 @@ def remove_negatives(detections, class_names, num):
     return predictions
 
 
-lib = CDLL('yolo_cpp_dll.dll', RTLD_GLOBAL)
+def get_cuda_version_of_system():
+    cuda_path = os.environ['CUDA_PATH']
+    verison = cuda_path[-4:]
+    return verison
+
+
+ver = get_cuda_version_of_system()
+if ver == '11.0':
+    lib = CDLL('yolo_cpp_dll_11.0.dll', RTLD_GLOBAL)
+elif ver == '10.1':
+    lib = CDLL('yolo_cpp_dll_10.1.dll', RTLD_GLOBAL)
+
 
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int

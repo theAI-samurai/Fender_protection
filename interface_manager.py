@@ -47,7 +47,7 @@ def main_program(cam_, cam_url):
 
             while not restart_status:
 
-                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=0,
+                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=1,
                                              cam_id=cam_, base_path=dir_of_file + '/ship/reference_files/')
                 if read:
                     start_timer = 0                                     # RESET timer = 0 as frame was received
