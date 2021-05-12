@@ -194,11 +194,11 @@ path = r'D:\darknet_fender_protection\ship\test_data'
 detect_coor_1 = (125, 295)
 detect_coor_4 = (400, 435)
 
-cap = cv2.VideoCapture(path+'/video2.mp4')
+cap = cv2.VideoCapture(path+'/test3.mp4')
 fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 #fgbg2 = cv2.createBackgroundSubtractorMOG2()
 #fgbg3 = cv2.bgsegm.createBackgroundSubtractorGMG()
-
+lst = []
 ctr = 0
 while(cap.isOpened()):# and ctr<2:
 #if ctr < 2:
@@ -213,6 +213,9 @@ while(cap.isOpened()):# and ctr<2:
     #print(len(cont))
     for e in cont:
         area = cv2.contourArea(e)
+        if area != 0:
+            lst.append(area)
+            print(area)
         if area > 7000:
             print(area)
             cv2.drawContours(img, cont, -1, (0, 255, 0), 0)
@@ -372,6 +375,7 @@ temp_ = session.post(notification_url, headers=headers, data=payload, files=file
 print(temp_.status_code, temp_.json())
 
 
+# ----------------------- TENSORFLOW operations ------------------------
 
 
 

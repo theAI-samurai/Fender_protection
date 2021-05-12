@@ -3,15 +3,15 @@ feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
 param_id = 4
 
 [camera_2]
-feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
+feeder_path = D:/darknet_fender_protection/ship/test_data/outputFile.mp4
 param_id = 5
 
 [camera_3]
-feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
+feeder_path = D:/darknet_fender_protection/ship/test_data/outputFile.mp4
 param_id = 8
 
 [camera_4]
-feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
+feeder_path = D:/darknet_fender_protection/ship/test_data/oFile.mp4
 param_id = 9
 
 [RESOLUTION]

@@ -74,7 +74,7 @@ def main_program(cam_, cam_url):
                                 contours, _ = cv2.findContours(fgmask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
                                 for contour in contours:
                                     area = cv2.contourArea(contour)
-                                    if area > 2000:
+                                    if area > 100:
                                         cv2.drawContours(image_, contours, -1, (0,0,0), 0)
                                         curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
                                         save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_overlap_'+str(cam_)+'_'+ curr_time + str(ctr) + '.jpg'
@@ -92,10 +92,13 @@ def main_program(cam_, cam_url):
                                 image = cv2.resize(cv2.imread(frame_path), new_dim)  # snapshot image file read
                                 fgmask = fgbg1.apply(image)
                                 fgmask = cv2.rectangle(fgmask, (math.floor(xmi), math.floor(ymi)),(math.floor(xma), math.floor(yma)), (0, 0, 0),-1)  # masking the detected coordinate
+                                cv2.imwrite('D:/darknet_fender_protection/ship/out/'+str(ctr)+'.jpg',fgmask)
+                                ctr=ctr+1
+                                #time.sleep(1)
                                 contours, _ = cv2.findContours(fgmask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
                                 for contour in contours:
                                     area = cv2.contourArea(contour)
-                                    if area > 1000:
+                                    if area > 100:
                                         cv2.drawContours(image, contours, -1, (0,0,0), 0)
                                         imge_ = cv2.addWeighted(image, 1, fender_markup_image, 1, 0)
                                         curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
