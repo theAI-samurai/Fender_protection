@@ -38,6 +38,7 @@ def train_file_creation():
                     train_file.write('\n')
     train_file.close()
 
+train_file_creation()
 
 def train_script():
     train_file_creation()
