@@ -32,6 +32,8 @@ def save_image(pil_image, name_for_file, camera_id):
         oldmask = os.umask(000)
         os.makedirs(ref_dir, 0o0777)
         os.umask(oldmask)
+    # Resize image to project standard in conf.txt
+    pil_image = pil_image.resize((WIDTH, HEIGHT))
     pil_image.save(ref_dir+name_for_file+'_'+str(camera_id)+'.jpg')
 
 
@@ -136,7 +138,7 @@ def camera_status_notification_all(all_list, data):
             print('NOTE: Potential Error on UI, Reload Application in Browser')
 
 
-def camera_status_notification(cam_id, status_code):
+def camera_status_notification(cam_id, status_code, remark=None):
     """ ---------------------------------------------------
     this function POSTs notification to frontend for camera status
     (same as above, but takes individual camera_ids instead of list of cam id's)
@@ -148,5 +150,9 @@ def camera_status_notification(cam_id, status_code):
     try:
         requests.post(cam_post, data={'active': status_code})
     except:
-        print('ERROR POST camStatus Notification FAILED for Camera ID : %(id)s' % {'id': cam_id})
+        # print('ERROR POST camStatus Notification FAILED for Camera ID : %(id)s' % {'id': cam_id})
+        if remark is not None:
+            print(remark, cam_id)
+        else:
+            pass
 

@@ -4,7 +4,7 @@ filename        : data_validate.py
 Name            : Ankit Mishra
 Email           : ankitmishra723@gmail.com
 Date created    : Feb 28, 2021
-Date Modified   : APR 13, 2021
+Date Modified   : May 22, 2021
 ---------------------------------------------------
 """
 
@@ -71,12 +71,23 @@ def vlc_stream_object_init_3(url):
     return vlc_obj
 
 
-def read_frames_using_vlc(player, delay_time, cam_id, base_path):
+def read_frames_using_vlc(player, delay_time, path):
+    """--------------------------------------------------------------------------------
+    This Function Reads frames from VLC object and saves in Dimension (960, 540)
+    Args:
+        player:         VLC Player Object
+        delay_time:     Delay parameter for time.sleep()
+        path:           Path where image is written
+
+    Returns:
+            True :      When frame has been Read and Saved
+            False:      When either VLc is not Playing or writmg onto disk is issue
+    ---------------------------------------------------------------------------------"""
     
     player.play()  # --> play
     if player.is_playing():
         time.sleep(delay_time)
-        player.video_take_snapshot(0, base_path + str(cam_id) + '.jpg', 0, 0)
+        player.video_take_snapshot(0, path, 960, 540)
         return True
     else:
         return False

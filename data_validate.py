@@ -58,7 +58,8 @@ def active_stream_initialize_vlc(cp, url):
     if player.is_playing():
         player.stop()
         player.release()
-        camera_status_notification(cam_id=cp, status_code=1)          # sending notification to frontend for active Cam
+        # sending notification to frontend for active Cam
+        camera_status_notification(cam_id=cp, status_code=1, remark='Active Stream Initialize CODE : 1, ')
         mrk = get_markup_image(cp)                                    # Markup Image for Camera ID = cp
         ref = get_reference_snapshot_image(cp)                        # Reference Image for Cam ID = cp
         if mrk and ref:
@@ -66,7 +67,8 @@ def active_stream_initialize_vlc(cp, url):
         else:
             return False
     else:
-        camera_status_notification(cam_id=cp, status_code=0)        # sending notification to frontend for inactive Cam
+        # sending notification to frontend for inactive Cam
+        camera_status_notification(cam_id=cp, status_code=0, remark='Active Stream Initialize CODE : 0, ')
         return False
 
 
@@ -99,6 +101,14 @@ def active_streams_initialize_OPENCV(data):
 
 
 def height_width_validate(snap_img_path, markup_img_path):
+    """ --------------------------------------------------------------------------------------
+    Args:
+        snap_img_path:      path of image file captured in real time and saved
+        markup_img_path:    path of Mrkup image
+
+    Returns:                Common Dimension between Captured Image and Markup image to resize
+                            return style :  ( W, H )
+    -------------------------------------------------------------------------------------- """
     snap = cv2.imread(snap_img_path)            # w = 960, H=576  print.shape = 576,960
     mark = cv2.imread(markup_img_path)          # w = 960, H=540  print.shape = 540,960
 
@@ -117,6 +127,7 @@ def height_width_validate(snap_img_path, markup_img_path):
     else:
         lst.append(mark.shape[0])
     new_dimension = tuple(lst)
+    # Return in ( W, H) style
     return new_dimension
 
 
