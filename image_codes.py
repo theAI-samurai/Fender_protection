@@ -213,7 +213,7 @@ def overlap_red_markup_v2(coordi_dict, min_x, min_y, max_x, max_y):
             print('probably from Right')
             return True
     # Assuming Y_Max is in Keys
-    elif max_y in height_keys_of_markup:
+    if max_y in height_keys_of_markup:
         if coordi_dict[max_y][0] < min_x < coordi_dict[max_y][1]:
             print('probably From Right')
             return True
