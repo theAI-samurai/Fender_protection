@@ -159,12 +159,79 @@ def list_marking_coord(mark_img):
     return lst
 
 
-def read_frames_rtsp_lib(url, obj_client):
-    #with rtsp.Client(rtsp_server_uri = url) as client:
-    time.sleep(2)
-    #while True:
-    _image = obj_client.read(raw=True)
-    return _image
+def markup_coordinate(markup_img_path, cam_id):
+    """
+    Time of Excecution 0.48 seconds
+    Args:
+        markup_img_path: Path of Markup Image Black bacground ans RED Marking
+        cam_id:          Camera ID for which markup is drawn
+
+    Returns:             Dictionary with Row number as ID &
+
+    """
+    coordi_dict = {}
+    img = cv2.imread(markup_img_path)                  # H = 540, W = 960
+    r = img[:, :, 2]
+    for i in range(img.shape[0]):           # H = 540
+        if r[i, :].max() > 150:
+            min_ = 0
+            max_ = 0
+            for j in range(img.shape[1]):   # W = 960
+                if r[i, j] > 150:
+                    min_ = j
+                    break
+            for k in range(img.shape[1]-1, 0, -1):
+                if r[i, k] > 150:
+                    max_ = k
+                    break
+            coordi_dict.update({i:(min_,max_)})
+    return coordi_dict, cam_id
+
+
+def overlap_red_markup_v2(coordi_dict, min_x, min_y, max_x, max_y):
+    """ ------------------------------------------------------------------
+    This Functions identifies possible overlapping scenario
+    Args:
+        coordi_dict:    Dictionary that contains min and max of each Row(H) in Image
+                        for RED Markup in Image
+                        Format --->  {H : (X_min, X_max}
+        min_x:          Minimum along Width for Detected  Class
+        min_y:          Minimum along Height for Detected Class
+        max_x:          Maximum along Width for Detected Class
+        max_y:          Maximum along Height for Detected Class
+
+    Returns:            TRUE if Overlap ; FALSE otherwise
+    -------------------------------------------------------------------- """
+    height_keys_of_markup = list(coordi_dict.keys())
+    # overlap scenarios
+    # Assuming Y_Min is in Keys
+    if min_y in height_keys_of_markup:
+        if coordi_dict[min_y][0] < max_x < coordi_dict[min_y][1]:
+            print('Probably From Left ')
+            return True
+        if coordi_dict[min_y][0] < min_x < coordi_dict[min_y][1]:
+            print('probably from Right')
+            return True
+    # Assuming Y_Max is in Keys
+    elif max_y in height_keys_of_markup:
+        if coordi_dict[max_y][0] < min_x < coordi_dict[max_y][1]:
+            print('probably From Right')
+            return True
+        if coordi_dict[max_y][0] < max_x < coordi_dict[max_y][1]:
+            print('Probably From Left ')
+            return True
+        # CRITICAL Assumptions
+        if min_x < coordi_dict[max_y][0] and max_x > coordi_dict[max_y][1]:
+            print('overlap from front')
+            return True
+    else:
+        return False
+
+
+
+
+
+
 
 
 

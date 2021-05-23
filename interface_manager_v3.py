@@ -30,6 +30,7 @@ else:
 def main_program(cam_, cam_url):
 
     restart_status = False
+    lst_markup_coord = None
 
     while True:
         global active_cams
@@ -53,6 +54,10 @@ def main_program(cam_, cam_url):
             # fender_markup_image is now --> Markup image
             markup_image, minx, miny, maxx, maxy = fender_coordi(path_=markup_img_pa)
 
+            # Getting Markup Coordinate for OVERLAP CALCULATIONS
+            if lst_markup_coord is None:
+                lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa, cam_id=cam_)
+
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
@@ -60,12 +65,16 @@ def main_program(cam_, cam_url):
                                              path=frame_path)
                 if read:                                                # Frame Received
                     start_timer = 0                                     # RESET timer = 0 as frame was received
+
                     # Replacing the Reference Fender Image after a fixed time
-                    if time.time() - reference_image_start_timer > 60:
+                    # &
+                    # Dictionary of Markup Coordinates for Cam ID : cam_ in Every 6 HOURS
+                    if time.time() - reference_image_start_timer > 21600:
+                        # lst_markup_coord = list_marking_coord(markup_image)       # New function in place
+                        lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa, cam_id=cam_)
+                        # commenting the Reference File Replace 24-05-2021
                         # shutil.copy2(frame_path, dir_of_file + '/ship/reference_files/fender_' + str(cam_) + '.jpg')
                         reference_image_start_timer = time.time()
-                    # List of Markup Coordinates ie RED line coordinates in markup image
-                    lst_markup_coord = list_marking_coord(markup_image)
 
                     # YOLO v3 Detection Module is called on the FRAME read
                     res = obj_detect.detect(frame_path.encode('ascii'))
@@ -84,7 +93,14 @@ def main_program(cam_, cam_url):
                         for i in range(len(res)):
                             cls, confi, coordi = res[i]
                             xmi, ymi, xma, yma = bbox2points(coordi)
-                            overlap = overlap_from_left_red_markup(cord_lst=lst_markup_coord, top_right=(xma, ymi))
+
+                            # OVERLAP CALCULATION on DETECTED RESULTS
+
+                            # below is commented as new logic in place 
+                            # overlap = overlap_from_left_red_markup(cord_lst=lst_markup_coord, top_right=(xma, ymi))
+                            overlap = overlap_red_markup_v2(coordi_dict=lst_markup_coord,
+                                                            min_x=xmi, min_y=ymi,
+                                                            max_x=xma, max_y=yma)
                             if overlap:
                                 any_overlapping += 1
                             result.append((cls, confi, (xmi, ymi), (xma, yma)))
