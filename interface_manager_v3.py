@@ -135,7 +135,7 @@ def main_program(cam_, cam_url):
                             # Area of Contour
                             for contour in contours:
                                 area = cv2.contourArea(contour)
-                                if 1000 < area < 5000:
+                                if 1500 < area < 5000:
                                     cv2.drawContours(image_, contour, -1, (200, 4, 14), 1)
                                     draw += 1
                             if draw > 0:
@@ -164,7 +164,7 @@ def main_program(cam_, cam_url):
                         # Area of Contour
                         for contour in contours:
                             area = cv2.contourArea(contour)
-                            if 1000 < area < 5000:
+                            if 1500 < area < 5000:
                                 cv2.drawContours(image_, contours, -1, (0, 200, 14), 1)
                                 draw += 1
                         if draw > 0:
