@@ -7,12 +7,12 @@ dir_of_file = dirname(realpath(__file__))
 dir_of_file = dir_of_file.replace("\\", '/')
 
 print(dir_of_file)
-log_file_path = dir_of_file + '/training_Yolo/logFile.log'
+log_file_path = dir_of_file + '/logFile_05_22.log'
 print(log_file_path)
 
 f = open(log_file_path)
 lines = [line.rstrip("\n") for line in f.readlines()]
-print(lines)
+#print(lines)
 
 numbers = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
@@ -22,15 +22,14 @@ loss = []
 prev_line = ""
 for line in lines:
     args = line.split(' ')
-    print(args)
     if len(args) > 1:
         if args[1][-1:] == ':' and args[1][0] in numbers:
-            print('=====', args[1][-1:], args[1][0])
+            # print('=====', args[1][-1:], args[1][0])
             iters.append(int(args[1][:-1]))
             loss.append(float(args[2].replace(",","")))
 
 fig, ax = plt.subplots()
-ax.plot(iters, loss, 'x')
+ax.plot(iters, loss)
 plt.xlabel('iters')
 plt.ylabel('loss')
 plt.grid()
