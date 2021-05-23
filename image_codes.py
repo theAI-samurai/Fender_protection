@@ -159,7 +159,7 @@ def list_marking_coord(mark_img):
     return lst
 
 
-def markup_coordinate(markup_img_path, cam_id):
+def markup_coordinate(markup_img_path):
     """
     Time of Excecution 0.48 seconds
     Args:
@@ -185,7 +185,7 @@ def markup_coordinate(markup_img_path, cam_id):
                     max_ = k
                     break
             coordi_dict.update({i:(min_,max_)})
-    return coordi_dict, cam_id
+    return coordi_dict
 
 
 def overlap_red_markup_v2(coordi_dict, min_x, min_y, max_x, max_y):

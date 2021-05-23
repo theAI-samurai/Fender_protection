@@ -15,8 +15,6 @@ for item in thread:
 
 # --------------------- FOR TESTING ONLY ------------
 #"""
-from interface_manager_v3 import *
-import threading
 
 if __name__ == '__main__':
     e = '9'

@@ -56,7 +56,7 @@ def main_program(cam_, cam_url):
 
             # Getting Markup Coordinate for OVERLAP CALCULATIONS
             if lst_markup_coord is None:
-                lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa, cam_id=cam_)
+                lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
 
             if not restart_status:
                 # Read FRAME IMAGE Path
@@ -65,13 +65,12 @@ def main_program(cam_, cam_url):
                                              path=frame_path)
                 if read:                                                # Frame Received
                     start_timer = 0                                     # RESET timer = 0 as frame was received
-
                     # Replacing the Reference Fender Image after a fixed time
                     # &
                     # Dictionary of Markup Coordinates for Cam ID : cam_ in Every 6 HOURS
                     if time.time() - reference_image_start_timer > 21600:
                         # lst_markup_coord = list_marking_coord(markup_image)       # New function in place
-                        lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa, cam_id=cam_)
+                        lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
                         # commenting the Reference File Replace 24-05-2021
                         # shutil.copy2(frame_path, dir_of_file + '/ship/reference_files/fender_' + str(cam_) + '.jpg')
                         reference_image_start_timer = time.time()
