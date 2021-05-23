@@ -131,7 +131,7 @@ def main_program(cam_, cam_url):
 
                                 # NOTIFICATION TRIGGER for Unknown Detection +
                                 # Threat Detections + No Overlap
-                                notification_trigger(cameraID=cam_, object='unknown_countours',
+                                notification_trigger(cameraID=cam_, object='Unknown',
                                                      status='Unknown',
                                                      object_known='UnKnown',
                                                      image_path=save_unknown_path)
@@ -149,7 +149,7 @@ def main_program(cam_, cam_url):
                         for contour in contours:
                             area = cv2.contourArea(contour)
                             if 1000 < area < 5000:
-                                cv2.drawContours(image_, contours, -1, (200, 4, 14), 2)
+                                cv2.drawContours(image_, contours, -1, (0, 200, 14), 1)
                                 draw += 1
                         if draw > 0:
                             curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
@@ -159,7 +159,7 @@ def main_program(cam_, cam_url):
                             cv2.imwrite(save_unknown_path, image_)
 
                             # NOTIFICATION TRIGGER for Unknown Detection + No Detections
-                            notification_trigger(cameraID=cam_, object='unknown_countours', status='Unknown',
+                            notification_trigger(cameraID=cam_, object='unknown', status='Unknown',
                                                  object_known='UnKnown', image_path=save_unknown_path)
 
                 # if Frame is not Read
