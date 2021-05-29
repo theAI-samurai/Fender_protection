@@ -42,12 +42,12 @@ train_file_creation()
 
 def train_script():
     train_file_creation()
-    os.system("darknet_11_0.exe detector train ship/cfg/ship.data ship/cfg/yolov3_full_ship.cfg ship/backup/yolov3_full_ship_last.weights -map")
+    os.system("darknet_11_0.exe detector train ship/cfg/ship.data ship/cfg/yolov3_full_ship.cfg ship/cfg/yolov3_full_ship.weights -map")
 
 
 while not Flag:
     curr_time = datetime.now()
-    if curr_time.hour > 0 and curr_time.hour < 5:
+    if curr_time.hour > 0 and curr_time.hour < 12:
         Flag = True
         train_script()
 

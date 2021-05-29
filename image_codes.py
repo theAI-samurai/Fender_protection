@@ -226,12 +226,3 @@ def overlap_red_markup_v2(coordi_dict, min_x, min_y, max_x, max_y):
             return True
     else:
         return False
-
-
-
-
-
-
-
-
-

@@ -194,7 +194,8 @@ path = r'D:\darknet_fender_protection\ship\test_data'
 detect_coor_1 = (125, 295)
 detect_coor_4 = (400, 435)
 
-cap = cv2.VideoCapture(path+'/test3.mp4')
+#cap = cv2.VideoCapture(path+'/test3.mp4')
+cap = cv2.VideoCapture(0)
 fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 #fgbg2 = cv2.createBackgroundSubtractorMOG2()
 #fgbg3 = cv2.bgsegm.createBackgroundSubtractorGMG()
@@ -205,12 +206,13 @@ while(cap.isOpened()):# and ctr<2:
     # read frames
     ret, img = cap.read()
     fgmask1 = fgbg1.apply(img)
-    fgmask1 = cv2.rectangle(fgmask1, detect_coor_1, detect_coor_4, (0, 0, 0), -1)  # masking the detected coordinate
+    #fgmask1 = cv2.rectangle(fgmask1, detect_coor_1, detect_coor_4, (0, 0, 0), -1)  # masking the detected coordinate
     #edge = cv2.Canny(fgmask1, 10, 150)
     #print(edge.shape, fgmask1.shape)
-    cont, _ = cv2.findContours(fgmask1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    ctr+=1
+    #cont, _ = cv2.findContours(fgmask1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    #ctr+=1
     #print(len(cont))
+    '''
     for e in cont:
         area = cv2.contourArea(e)
         if area != 0:
@@ -219,6 +221,7 @@ while(cap.isOpened()):# and ctr<2:
         if area > 7000:
             print(area)
             cv2.drawContours(img, cont, -1, (0, 255, 0), 0)
+    '''
     cv2.imshow('Original', img)
     cv2.imshow('MOG', fgmask1)
     #cv2.imshow('edge', edge)
@@ -375,7 +378,18 @@ temp_ = session.post(notification_url, headers=headers, data=payload, files=file
 print(temp_.status_code, temp_.json())
 
 
-# ----------------------- TENSORFLOW operations ------------------------
+# ----------------------- black percentage  ------------------------
+import cv2
+import numpy as np
+import os
+
+path = r'D:\darknet_fender_protection\ship\test2/'
+
+for f in os.listdir(path):
+    img = cv2.imread(path+f)
+    number_of_white_pix = np.sum(img[:,:,0] >= 250)
+    number_of_black_pix = np.sum(img[:,:,0] <= 5)
+    print(f, number_of_black_pix, number_of_white_pix, (number_of_white_pix / 518400)*100)
 
 
 
