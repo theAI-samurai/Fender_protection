@@ -94,41 +94,41 @@ def main_program(cam_, cam_url):
                             result = []
                             any_overlapping = 0
                             image_ = None
-                            for i in range(len(res)) and res[i][0] != b'safe':
+                            for i in range(len(res)):
                                 cls, confi, coordi = res[i]
-                                xmi, ymi, xma, yma = bbox2points(coordi)
+                                if cls != b'safe' or cls != b'Safe':
+                                    xmi, ymi, xma, yma = bbox2points(coordi)
 
-                                # OVERLAP CALCULATION on DETECTED RESULTS
+                                    # OVERLAP CALCULATION on DETECTED RESULTS
 
-                                # below is commented as new logic in place
-                                # overlap = overlap_from_left_red_markup(cord_lst=lst_markup_coord, top_right=(xma, ymi))
-                                overlap = overlap_red_markup_v2(coordi_dict=lst_markup_coord,
-                                                                min_x=xmi, min_y=ymi,
-                                                                max_x=xma, max_y=yma)
-                                if overlap:
-                                    any_overlapping += 1
-                                result.append((cls, confi, (xmi, ymi), (xma, yma)))
+                                    # below is commented as new logic in place
+                                    # overlap = overlap_from_left_red_markup(cord_lst=lst_markup_coord, top_right=(xma, ymi))
+                                    overlap = overlap_red_markup_v2(coordi_dict=lst_markup_coord,
+                                                                    min_x=xmi, min_y=ymi,
+                                                                    max_x=xma, max_y=yma)
+                                    if overlap:
+                                        any_overlapping += 1
+                                    result.append((cls, confi, (xmi, ymi), (xma, yma)))
 
-                                # Rectangle marking for BOAT/ SHIP/ THREAT coordinates
-                                image_ = cv2.rectangle(image, (math.floor(xmi), math.floor(ymi)),
-                                                      (math.floor(xma), math.floor(yma)),
-                                                      (255, 255, 0), 2)
-                                # Detection Text on FRAME Image
-                                image_ = cv2.putText(image_, cls.decode(), (math.floor(xmi), math.floor(ymi)-3),
-                                                    cv2.FONT_HERSHEY_SIMPLEX,
-                                                    0.5, (0, 255, 255), 1)
-                                # OVERLAPPING Markup on FRAME image
-                                image_ = cv2.addWeighted(image_, 1, markup_image, 1, 0)
+                                    # Rectangle marking for BOAT/ SHIP/ THREAT coordinates
+                                    image_ = cv2.rectangle(image, (math.floor(xmi), math.floor(ymi)),
+                                                          (math.floor(xma), math.floor(yma)),
+                                                          (255, 255, 0), 2)
+                                    # Detection Text on FRAME Image
+                                    image_ = cv2.putText(image_, cls.decode(), (math.floor(xmi), math.floor(ymi)-3),
+                                                        cv2.FONT_HERSHEY_SIMPLEX,
+                                                        0.5, (0, 255, 255), 1)
+                                    # OVERLAPPING Markup on FRAME image
+                                    image_ = cv2.addWeighted(image_, 1, markup_image, 1, 0)
 
-                                # MASKING the Detected coordinate  --> This is BW image
-                                # Thickness = -1 Fills the rectangle with specified Color
-                                fgmask = cv2.rectangle(fgmask, (xmi, ymi), (xma, yma), (0, 0, 0), thickness=-1)
+                                    # MASKING the Detected coordinate  --> This is BW image
+                                    # Thickness = -1 Fills the rectangle with specified Color
+                                    fgmask = cv2.rectangle(fgmask, (xmi, ymi), (xma, yma), (0, 0, 0), thickness=-1)
 
                             # NOTIFICATION TRIGGER for OVERLAPPING Scenario
                             if any_overlapping > 0:
-                                save_detect_path = dir_of_file + '/ship/reference_files/detect_' + str(cam_) +str(ctr)+ '.jpg'
+                                save_detect_path = dir_of_file + '/ship/reference_files/detect_' + str(cam_) + '.jpg'
                                 cv2.imwrite(save_detect_path, image_)
-                                ctr+=1
                                 notification_trigger(cameraID=cam_, object=cls, status='Threat',
                                                      object_known='Known', image_path=save_detect_path)
 
@@ -145,9 +145,7 @@ def main_program(cam_, cam_url):
                                         draw += 1
                                 if draw > 0:
                                     curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
-                                    save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(
-                                        cam_) + '_' + curr_time + str(ctr) + '.jpg'
-                                    ctr += 1
+                                    save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(cam_) + '_' + curr_time + '.jpg'
                                     cv2.imwrite(save_unknown_path, image_)
 
                                     # NOTIFICATION TRIGGER for Unknown Detection +
@@ -174,9 +172,7 @@ def main_program(cam_, cam_url):
                                     draw += 1
                             if draw > 0:
                                 curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
-                                save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(
-                                    cam_) + '_' + curr_time + str(ctr) + '.jpg'
-                                ctr += 1
+                                save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(cam_) + '_' + curr_time + '.jpg'
                                 cv2.imwrite(save_unknown_path, image_)
 
                                 # NOTIFICATION TRIGGER for Unknown Detection + No Detections
