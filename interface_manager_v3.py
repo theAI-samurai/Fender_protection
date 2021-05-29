@@ -83,7 +83,7 @@ def main_program(cam_, cam_url):
 
                     # checking if there is a pixel worth noting after subtraction
                     number_of_white_pix = np.sum(fgmask >= 250)
-                    if (number_of_white_pix / 518400)*100 > 0.1:
+                    if (number_of_white_pix / 518400)*100 > 0.2:
                         print((number_of_white_pix / 518400)*100)
 
                         # YOLO v3 Detection Module is called on the FRAME read
