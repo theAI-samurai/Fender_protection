@@ -75,6 +75,7 @@ def main_program(cam_, cam_url):
                         # shutil.copy2(frame_path, dir_of_file + '/ship/reference_files/fender_' + str(cam_) + '.jpg')
                         reference_image_start_timer = time.time()
 
+                    # ------------------ MAIN EXECUTIONS on IMAGE ----------------------
                     # Read FRAME Image --> This is Original unchanged Image
                     image = cv2.imread(frame_path)
 
@@ -84,19 +85,24 @@ def main_program(cam_, cam_url):
                     # checking if there is a pixel worth noting after subtraction
                     number_of_white_pix = np.sum(fgmask >= 250)
                     if (number_of_white_pix / 518400)*100 > 0.2:
-                        print((number_of_white_pix / 518400)*100)
 
                         # YOLO v3 Detection Module is called on the FRAME read
                         res = obj_detect.detect(frame_path.encode('ascii'))
 
                         # IF Any detection was made by YOLO Network
                         if len(res) != 0:
+                            print('Length', len(res))
+                            print(res)
                             result = []
                             any_overlapping = 0
                             image_ = None
                             for i in range(len(res)):
                                 cls, confi, coordi = res[i]
-                                if cls != b'safe' or cls != b'Safe':
+                                # print('---here1---', cls, confi, coordi)
+                                # print(cls.decode(), type(cls.decode()), len(cls.decode()), cls.decode() != 'safe')
+
+                                # while cls identified is other than safe
+                                if cls.decode() != 'safe':
                                     xmi, ymi, xma, yma = bbox2points(coordi)
 
                                     # OVERLAP CALCULATION on DETECTED RESULTS
@@ -179,13 +185,15 @@ def main_program(cam_, cam_url):
                                 notification_trigger(cameraID=cam_, object='unknown', status='Unknown',
                                                      object_known='UnKnown', image_path=save_unknown_path)
 
+                    else:
+                        pass
                 # if Frame is not Read
                 else:
                     if start_timer == 0:
                         # start timer if Frame not Recieved
                         start_timer = time.time()
                     # check if timer is active for 120 sec or 2 mins
-                    if start_timer != 0 and time.time() - start_timer > 120:
+                    if start_timer != 0 and time.time() - start_timer > 60:
                         active_cams.remove(cam_)            # delete cameraID from Active cam list
                         del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
                         restart_status = True               # Status : True to reacquire objects for camID

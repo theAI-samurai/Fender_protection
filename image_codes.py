@@ -184,7 +184,7 @@ def markup_coordinate(markup_img_path):
                 if r[i, k] > 150:
                     max_ = k
                     break
-            coordi_dict.update({i:(min_,max_)})
+            coordi_dict.update({i: (min_, max_)})
     return coordi_dict
 
 
