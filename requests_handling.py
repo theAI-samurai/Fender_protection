@@ -33,7 +33,7 @@ def save_image(pil_image, name_for_file, camera_id):
         os.makedirs(ref_dir, 0o0777)
         os.umask(oldmask)
     # Resize image to project standard in conf.txt
-    pil_image = pil_image.resize((WIDTH, HEIGHT))
+    pil_image = pil_image.resize((int(WIDTH), int(HEIGHT)))
     pil_image.save(ref_dir+name_for_file+'_'+str(camera_id)+'.jpg')
 
 

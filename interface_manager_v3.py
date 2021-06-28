@@ -69,7 +69,6 @@ def main_program(cam_, cam_url):
                     # &
                     # Dictionary of Markup Coordinates for Cam ID : cam_ in Every 6 HOURS
                     if time.time() - reference_image_start_timer > 21600:
-                        # lst_markup_coord = list_marking_coord(markup_image)       # New function in place
                         lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
                         # commenting the Reference File Replace 24-05-2021
                         # shutil.copy2(frame_path, dir_of_file + '/ship/reference_files/fender_' + str(cam_) + '.jpg')
@@ -83,7 +82,10 @@ def main_program(cam_, cam_url):
                     fgmask = fgbg1.apply(image)
 
                     # checking if there is a pixel worth noting after subtraction
-                    number_of_white_pix = np.sum(fgmask >= 250)
+                    if fgmask is not None:
+                        number_of_white_pix = np.sum(fgmask >= 250)
+                    else:
+                        break
                     if (number_of_white_pix / 518400)*100 > 0.2:
 
                         # YOLO v3 Detection Module is called on the FRAME read
@@ -91,24 +93,18 @@ def main_program(cam_, cam_url):
 
                         # IF Any detection was made by YOLO Network
                         if len(res) != 0:
-                            print('Length', len(res))
                             print(res)
                             result = []
                             any_overlapping = 0
                             image_ = None
                             for i in range(len(res)):
                                 cls, confi, coordi = res[i]
-                                # print('---here1---', cls, confi, coordi)
-                                # print(cls.decode(), type(cls.decode()), len(cls.decode()), cls.decode() != 'safe')
 
                                 # while cls identified is other than safe
                                 if cls.decode() != 'safe':
                                     xmi, ymi, xma, yma = bbox2points(coordi)
 
                                     # OVERLAP CALCULATION on DETECTED RESULTS
-
-                                    # below is commented as new logic in place
-                                    # overlap = overlap_from_left_red_markup(cord_lst=lst_markup_coord, top_right=(xma, ymi))
                                     overlap = overlap_red_markup_v2(coordi_dict=lst_markup_coord,
                                                                     min_x=xmi, min_y=ymi,
                                                                     max_x=xma, max_y=yma)
@@ -118,12 +114,12 @@ def main_program(cam_, cam_url):
 
                                     # Rectangle marking for BOAT/ SHIP/ THREAT coordinates
                                     image_ = cv2.rectangle(image, (math.floor(xmi), math.floor(ymi)),
-                                                          (math.floor(xma), math.floor(yma)),
-                                                          (255, 255, 0), 2)
+                                                           (math.floor(xma), math.floor(yma)),
+                                                           (255, 255, 0), 2)
                                     # Detection Text on FRAME Image
                                     image_ = cv2.putText(image_, cls.decode(), (math.floor(xmi), math.floor(ymi)-3),
-                                                        cv2.FONT_HERSHEY_SIMPLEX,
-                                                        0.5, (0, 255, 255), 1)
+                                                         cv2.FONT_HERSHEY_SIMPLEX,
+                                                         0.5, (0, 255, 255), 1)
                                     # OVERLAPPING Markup on FRAME image
                                     image_ = cv2.addWeighted(image_, 1, markup_image, 1, 0)
 
@@ -135,8 +131,8 @@ def main_program(cam_, cam_url):
                             if any_overlapping > 0:
                                 save_detect_path = dir_of_file + '/ship/reference_files/detect_' + str(cam_) + '.jpg'
                                 cv2.imwrite(save_detect_path, image_)
-                                notification_trigger(cameraID=cam_, object=cls, status='Threat',
-                                                     object_known='Known', image_path=save_detect_path)
+                                notification_trigger(cameraID=cam_, object='Vessel', status='Threat',
+                                                     object_known=cls.decode(), image_path=save_detect_path)
 
                             # NOTIFICATION for DETECTION but, NO OVERLAPPING Scenario
                             else:
@@ -156,9 +152,10 @@ def main_program(cam_, cam_url):
 
                                     # NOTIFICATION TRIGGER for Unknown Detection +
                                     # Threat Detections + No Overlap
-                                    notification_trigger(cameraID=cam_, object='Unknown',
-                                                         status='Unknown',
-                                                         object_known='UnKnown',
+                                    notification_trigger(cameraID=cam_,
+                                                         object='Vessel_No_breach',
+                                                         status=cls.decode(),
+                                                         object_known='Known',
                                                          image_path=save_unknown_path)
 
                         # IF No Detection was made by YOLO Network
@@ -182,9 +179,10 @@ def main_program(cam_, cam_url):
                                 cv2.imwrite(save_unknown_path, image_)
 
                                 # NOTIFICATION TRIGGER for Unknown Detection + No Detections
-                                notification_trigger(cameraID=cam_, object='unknown', status='Unknown',
-                                                     object_known='UnKnown', image_path=save_unknown_path)
-
+                                notification_trigger(cameraID=cam_, object='Unidentified Object',
+                                                     status='System not Trained',
+                                                     object_known='UnKnown',
+                                                     image_path=save_unknown_path)
                     else:
                         pass
                 # if Frame is not Read
@@ -198,5 +196,5 @@ def main_program(cam_, cam_url):
                         del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
                         restart_status = True               # Status : True to reacquire objects for camID
                         camera_status_notification(cam_id=cam_, status_code=0)      # notification trigger to add
-                        print('failed request sent', cam_)
+                        print('failed request sent for CAMID : ', cam_)
 

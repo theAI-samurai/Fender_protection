@@ -10,6 +10,10 @@ config = configparser.RawConfigParser()
 configFilePath = dir_of_file + '/conf.txt'
 config.readfp(open(configFilePath))
 
+# Resolution
+WIDTH = config.get('RESOLUTION', 'WIDTH')
+HEIGHT = config.get('RESOLUTION', 'HEIGHT')
+
 camera_id_1 = config.get('camera_1', 'param_id')
 camera_id_2 = config.get('camera_2', 'param_id')
 camera_id_3 = config.get('camera_3', 'param_id')
@@ -34,7 +38,7 @@ def save_image(pil_image, name_for_file, camera_id):
         os.makedirs(ref_dir, 0o0777)
         os.umask(oldmask)
     # Resize image to project standard in conf.txt
-    pil_image = pil_image.resize((WIDTH, HEIGHT))
+    pil_image = pil_image.resize((int(WIDTH), int(HEIGHT)))
     pil_image.save(ref_dir+name_for_file+'_'+str(camera_id)+'.jpg')
 
 
@@ -48,21 +52,14 @@ def get_markup_image(cameraID):
     markup_cam_1 = markup_base_url+str(cameraID)
     print(markup_cam_1)
     file_name = dir_of_file + '/ship/reference_files/markup_'+str(cameraID)+'.jpg'
-    if os.path.isfile(file_name):
-        # if File Exists no need to fetch
+
+    r = requests.get(markup_cam_1, stream=True).raw
+    if r.status == 200:
+        img = Image.open(r).convert('RGB')
+        save_image(img, name_for_file='markup', camera_id=cameraID)
         return True
     else:
-        try:
-            r = requests.get(markup_cam_1, stream=True).raw
-            if r.status == 200:
-                img = Image.open(r).convert('RGB')
-                save_image(img, name_for_file='markup', camera_id=cameraID)
-                return True
-            else:
-                return False
-        except:
-            print('ERROR  GET Request FAILED for markup image for Camera ID : %(id)s' % {'id': cameraID})
-            return 0
+        return False
 
 
 get_markup_image(camera_id_1)

@@ -392,5 +392,15 @@ for f in os.listdir(path):
     print(f, number_of_black_pix, number_of_white_pix, (number_of_white_pix / 518400)*100)
 
 
+# --------------------- GET FILES ---------------------
+import os
+
+path = r'D:\dataset\Framesforannotation/'
+
+for f in os.listdir(path):
+    if f.endswith('.jpg'):
+        print(path.replace('\\','/')+f)
+
+
 
 

@@ -143,14 +143,14 @@ def overlap_from_left_red_markup(cord_lst, top_right):
 
 
 def list_marking_coord(mark_img):
-    """-----------------------------------------
+    """---------------------------------------------------------------------
 
     Args:
         mark_img: markup image to get list of coordinates for hand markup
 
     Returns: A list containg tuples in format (W, H) cordinates
 
-    -----------------------------------------"""
+    ---------------------------------------------------------------------"""
     lst = []
     for i in range(mark_img.shape[0]):       # H
         for j in range(mark_img.shape[1]):   # W
@@ -160,15 +160,15 @@ def list_marking_coord(mark_img):
 
 
 def markup_coordinate(markup_img_path):
-    """
+    """-----------------------------------------------------------------------
     Time of Excecution 0.48 seconds
     Args:
-        markup_img_path: Path of Markup Image Black bacground ans RED Marking
+        markup_img_path: Path of Markup Image Black background and RED Marking
         cam_id:          Camera ID for which markup is drawn
 
     Returns:             Dictionary with Row number as ID &
 
-    """
+    ------------------------------------------------------------------------"""
     coordi_dict = {}
     img = cv2.imread(markup_img_path)                  # H = 540, W = 960
     r = img[:, :, 2]
