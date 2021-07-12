@@ -402,5 +402,42 @@ for f in os.listdir(path):
         print(path.replace('\\','/')+f)
 
 
+# -------------------------------------------
+import os
+import shutil
+
+basepath = 'D:/dataset/tobe annotated/new_videos/'
+
+for dir in os.listdir(basepath):
+    if dir != 'annotated':
+        for file in os.listdir(basepath+dir):
+            if file.endswith('.txt') and file != 'classes.txt':
+                nm = basepath+dir+'/'+file
+                file_ = file.split('.')[0]+'.jpg'
+                nm_im = basepath+dir+'/'+file_
+                print(nm)
+                print(nm_im)
+                shutil.move(nm, basepath+'annotated/'+file)
+                shutil.move(nm_im, basepath + 'annotated/' + file_)
+
+
+
+import os
+import shutil
+
+basepath = 'D:/dataset/tobe annotated/new_videos/annotated/'
+
+for f in os.listdir(basepath):
+    if f[0] == '$':
+        new_nm = 'f1_'+f[1:]
+        print(f, new_nm)
+        os.rename(basepath+f, basepath+new_nm)
+
+
+import os
+basepath = 'D:/dataset/Framesforannotation/'
+for file in os.listdir(basepath):
+    if file.endswith('.jpg'):
+        print(basepath+file)
 
 

@@ -3,7 +3,7 @@ feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
 param_id = 4
 
 [camera_2]
-feeder_path = D:/darknet_fender_protection/ship/test_data/outputFile1.mp4
+feeder_path = D:/darknet_fender_protection/ship/test_data/5output.mp4
 param_id = 5
 
 [camera_3]
@@ -11,7 +11,7 @@ feeder_path = D:/darknet_fender_protection/ship/test_data/oFile.mp4
 param_id = 8
 
 [camera_4]
-feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
+feeder_path = D:/darknet_fender_protection/ship/test_data/3_test2.mp4
 param_id = 9
 
 [RESOLUTION]
@@ -26,4 +26,4 @@ ref_ext = http://vmi317167.contaboserver.net/ship-detection-api/api/v1/guard/vid
 cam_active_status = http://localhost:3011/api/v1/camerastatus/
 
 [TRAINING_PERIOD]
-days = 7
+days = 365

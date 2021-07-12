@@ -17,7 +17,7 @@ for item in thread:
 #"""
 
 if __name__ == '__main__':
-    e = '9'
+    e = '5'
     main_program(e, all_camera_data[e])
 
 #"""
