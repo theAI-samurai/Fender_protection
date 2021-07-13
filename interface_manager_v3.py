@@ -91,12 +91,13 @@ def main_program(cam_, cam_url):
 
                     # YOLO v3 Detection Module is called on the FRAME read
                     res = obj_detect.detect(frame_path.encode('ascii'))
+                    cls = 'None'
                     # IF Any detection was made by YOLO Network
                     if len(res) != 0:
                         result = []
                         any_overlapping = 0
                         image_ = None
-                        cls = 'None'
+
                         for i in range(len(res)):
                             cls, confi, coordi = res[i]
 
