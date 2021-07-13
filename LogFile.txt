@@ -18,3 +18,240 @@ Mon, 12 Jul 2021 19:20:07: DL Model dectected, ship
 Mon, 12 Jul 2021 19:20:11: Notification sent for Vessel Not Breach, ship
 Mon, 12 Jul 2021 19:20:17: DL Model dectected, ship
 Mon, 12 Jul 2021 19:20:19: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:10:25: DL Model dectected, ship
+Tue, 13 Jul 2021 09:10:29: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:10:36: DL Model dectected, ship
+Tue, 13 Jul 2021 09:10:40: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:10:46: DL Model dectected, ship
+Tue, 13 Jul 2021 09:10:50: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:10:56: DL Model dectected, ship
+Tue, 13 Jul 2021 09:11:00: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:11:07: DL Model dectected, ship
+Tue, 13 Jul 2021 09:11:11: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:11:17: DL Model dectected, ship
+Tue, 13 Jul 2021 09:11:21: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:11:27: DL Model dectected, ship
+Tue, 13 Jul 2021 09:11:31: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:11:37: DL Model dectected, ship
+Tue, 13 Jul 2021 09:11:41: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:11:47: DL Model dectected, ship
+Tue, 13 Jul 2021 09:11:51: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:11:57: DL Model dectected, ship
+Tue, 13 Jul 2021 09:12:01: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:12:07: DL Model dectected, ship
+Tue, 13 Jul 2021 09:12:11: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:12:17: DL Model dectected, ship
+Tue, 13 Jul 2021 09:12:21: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:12:27: DL Model dectected, ship
+Tue, 13 Jul 2021 09:12:31: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:12:38: DL Model dectected, ship
+Tue, 13 Jul 2021 09:12:42: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:12:48: DL Model dectected, ship
+Tue, 13 Jul 2021 09:12:52: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:12:58: DL Model dectected, ship
+Tue, 13 Jul 2021 09:13:02: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:13:08: DL Model dectected, ship
+Tue, 13 Jul 2021 09:13:12: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:13:18: DL Model dectected, ship
+Tue, 13 Jul 2021 09:13:22: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:13:28: DL Model dectected, ship
+Tue, 13 Jul 2021 09:13:32: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:13:38: DL Model dectected, ship
+Tue, 13 Jul 2021 09:13:42: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:13:48: DL Model dectected, ship
+Tue, 13 Jul 2021 09:13:52: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:13:58: DL Model dectected, ship
+Tue, 13 Jul 2021 09:14:03: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:14:09: DL Model dectected, ship
+Tue, 13 Jul 2021 09:14:13: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:14:19: DL Model dectected, ship
+Tue, 13 Jul 2021 09:14:23: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:14:31: DL Model dectected, ship
+Tue, 13 Jul 2021 09:14:35: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:14:43: DL Model dectected, ship
+Tue, 13 Jul 2021 09:14:47: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:14:54: DL Model dectected, ship
+Tue, 13 Jul 2021 09:14:58: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:15:06: DL Model dectected, ship
+Tue, 13 Jul 2021 09:15:10: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:15:18: DL Model dectected, ship
+Tue, 13 Jul 2021 09:15:22: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:15:29: DL Model dectected, ship
+Tue, 13 Jul 2021 09:15:34: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:15:41: DL Model dectected, ship
+Tue, 13 Jul 2021 09:15:45: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:15:53: DL Model dectected, ship
+Tue, 13 Jul 2021 09:15:58: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:16:05: DL Model dectected, ship
+Tue, 13 Jul 2021 09:16:09: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:16:17: DL Model dectected, ship
+Tue, 13 Jul 2021 09:16:21: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:16:29: DL Model dectected, ship
+Tue, 13 Jul 2021 09:16:33: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:16:40: DL Model dectected, ship
+Tue, 13 Jul 2021 09:16:44: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:16:52: DL Model dectected, ship
+Tue, 13 Jul 2021 09:16:56: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:17:04: DL Model dectected, ship
+Tue, 13 Jul 2021 09:17:08: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:17:16: DL Model dectected, ship
+Tue, 13 Jul 2021 09:17:20: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:17:28: DL Model dectected, ship
+Tue, 13 Jul 2021 09:17:32: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:17:39: DL Model dectected, ship
+Tue, 13 Jul 2021 09:17:44: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:17:51: DL Model dectected, ship
+Tue, 13 Jul 2021 09:17:55: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:18:03: DL Model dectected, ship
+Tue, 13 Jul 2021 09:18:07: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:18:15: DL Model dectected, ship
+Tue, 13 Jul 2021 09:18:19: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:18:27: DL Model dectected, ship
+Tue, 13 Jul 2021 09:18:31: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:18:39: DL Model dectected, ship
+Tue, 13 Jul 2021 09:18:43: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:18:50: DL Model dectected, ship
+Tue, 13 Jul 2021 09:18:55: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:19:02: DL Model dectected, ship
+Tue, 13 Jul 2021 09:19:06: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:19:15: DL Model dectected, ship
+Tue, 13 Jul 2021 09:19:19: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:19:26: DL Model dectected, ship
+Tue, 13 Jul 2021 09:19:30: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:19:38: DL Model dectected, ship
+Tue, 13 Jul 2021 09:19:42: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:19:50: DL Model dectected, ship
+Tue, 13 Jul 2021 09:19:54: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:20:02: DL Model dectected, ship
+Tue, 13 Jul 2021 09:20:06: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:20:13: DL Model dectected, ship
+Tue, 13 Jul 2021 09:20:17: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:20:25: DL Model dectected, ship
+Tue, 13 Jul 2021 09:20:29: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:20:37: DL Model dectected, ship
+Tue, 13 Jul 2021 09:20:41: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:20:49: DL Model dectected, ship
+Tue, 13 Jul 2021 09:20:53: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:21:01: DL Model dectected, ship
+Tue, 13 Jul 2021 09:21:05: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:21:12: DL Model dectected, ship
+Tue, 13 Jul 2021 09:21:17: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:21:24: DL Model dectected, ship
+Tue, 13 Jul 2021 09:21:28: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:21:36: DL Model dectected, ship
+Tue, 13 Jul 2021 09:21:40: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:21:48: DL Model dectected, ship
+Tue, 13 Jul 2021 09:21:52: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:22:00: DL Model dectected, ship
+Tue, 13 Jul 2021 09:22:04: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:22:11: DL Model dectected, ship
+Tue, 13 Jul 2021 09:22:15: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:22:23: DL Model dectected, ship
+Tue, 13 Jul 2021 09:22:27: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:22:35: DL Model dectected, ship
+Tue, 13 Jul 2021 09:22:39: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:22:47: DL Model dectected, ship
+Tue, 13 Jul 2021 09:22:51: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:22:58: DL Model dectected, ship
+Tue, 13 Jul 2021 09:23:02: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:23:10: DL Model dectected, ship
+Tue, 13 Jul 2021 09:23:14: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:23:21: DL Model dectected, ship
+Tue, 13 Jul 2021 09:23:26: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:23:33: DL Model dectected, ship
+Tue, 13 Jul 2021 09:23:37: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:23:45: DL Model dectected, ship
+Tue, 13 Jul 2021 09:23:49: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:23:56: DL Model dectected, ship
+Tue, 13 Jul 2021 09:24:00: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:24:07: DL Model dectected, ship
+Tue, 13 Jul 2021 09:24:12: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:24:19: DL Model dectected, ship
+Tue, 13 Jul 2021 09:24:23: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:24:30: DL Model dectected, ship
+Tue, 13 Jul 2021 09:24:35: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:24:42: DL Model dectected, ship
+Tue, 13 Jul 2021 09:24:46: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:24:53: DL Model dectected, ship
+Tue, 13 Jul 2021 09:24:57: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:25:05: DL Model dectected, ship
+Tue, 13 Jul 2021 09:25:09: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:25:16: DL Model dectected, ship
+Tue, 13 Jul 2021 09:25:20: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:25:28: DL Model dectected, ship
+Tue, 13 Jul 2021 09:25:32: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:25:39: DL Model dectected, ship
+Tue, 13 Jul 2021 09:25:43: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:25:51: DL Model dectected, ship
+Tue, 13 Jul 2021 09:25:55: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:26:02: DL Model dectected, ship
+Tue, 13 Jul 2021 09:26:06: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:26:14: DL Model dectected, ship
+Tue, 13 Jul 2021 09:26:18: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:26:31: DL Model dectected, ship
+Tue, 13 Jul 2021 09:26:35: Notification sent for Vessel Not Breach, ship
+Tue, 13 Jul 2021 09:26:46: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:26:58: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:27:09: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:27:21: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:27:32: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:27:44: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:27:56: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:28:07: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:28:19: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:28:31: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:28:42: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:28:54: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:29:06: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:29:18: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:29:30: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:29:41: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:29:53: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:30:05: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:30:22: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:30:34: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:30:45: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:30:57: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:31:09: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:31:21: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:31:32: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:31:43: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:31:55: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:32:07: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:32:19: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:32:31: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:32:42: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:32:53: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:33:06: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:33:14: DL Model dectected, ship
+Tue, 13 Jul 2021 09:33:18: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:33:25: DL Model dectected, ship
+Tue, 13 Jul 2021 09:33:30: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:33:37: DL Model dectected, ship
+Tue, 13 Jul 2021 09:33:41: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:33:49: DL Model dectected, ship
+Tue, 13 Jul 2021 09:33:53: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:34:01: DL Model dectected, ship
+Tue, 13 Jul 2021 09:34:06: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:34:14: DL Model dectected, ship
+Tue, 13 Jul 2021 09:34:18: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:34:26: DL Model dectected, ship
+Tue, 13 Jul 2021 09:34:30: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:34:38: DL Model dectected, ship
+Tue, 13 Jul 2021 09:34:42: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:34:50: DL Model dectected, ship
+Tue, 13 Jul 2021 09:34:54: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:35:01: DL Model dectected, ship
+Tue, 13 Jul 2021 09:35:05: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:35:12: DL Model dectected, ship
+Tue, 13 Jul 2021 09:35:16: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:35:24: DL Model dectected, ship
+Tue, 13 Jul 2021 09:35:28: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:35:35: DL Model dectected, ship
+Tue, 13 Jul 2021 09:35:39: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:35:47: DL Model dectected, ship
+Tue, 13 Jul 2021 09:35:51: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:35:58: DL Model dectected, ship
+Tue, 13 Jul 2021 09:36:02: Notification sent for Vessel Breach, ship
+Tue, 13 Jul 2021 09:36:13: Notification sent for UnIdendified Object, ship
+Tue, 13 Jul 2021 09:36:25: Notification sent for UnIdendified Object, ship

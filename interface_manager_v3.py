@@ -82,6 +82,13 @@ def main_program(cam_, cam_url):
                     # Foreground Mask of Image
                     fgmask = fgbg1.apply(image)
 
+                    # checking if there is a pixel worth noting after subtraction
+                    if fgmask is not None:
+                        number_of_white_pix = np.sum(fgmask >= 250)
+                        white_pixel_percent = (number_of_white_pix / 518400)*100
+                    else:
+                        break
+
                     # YOLO v3 Detection Module is called on the FRAME read
                     res = obj_detect.detect(frame_path.encode('ascii'))
                     # IF Any detection was made by YOLO Network
@@ -146,7 +153,7 @@ def main_program(cam_, cam_url):
                                 if 40 < area < 5000:
                                     cv2.drawContours(image_, contour, -1, (200, 4, 14), 1)
                                     draw += 1
-                            if draw > 0 or image_ is not None:
+                            if image_ is not None or (draw > 0 and white_pixel_percent > 0.2):
                                 curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
                                 save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(cam_) + '_' + curr_time + '.jpg'
                                 cv2.imwrite(save_unknown_path, image_)
@@ -178,7 +185,7 @@ def main_program(cam_, cam_url):
                             if 40 < area < 5000:
                                 cv2.drawContours(image_, contours, -1, (191, 11, 11), 2)
                                 draw += 1
-                        if draw > 0:
+                        if draw > 0 and white_pixel_percent > 0.2:
                             curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
                             save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(cam_) + '_' + curr_time + '.jpg'
                             cv2.imwrite(save_unknown_path, image_)
