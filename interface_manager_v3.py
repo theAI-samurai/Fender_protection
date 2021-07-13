@@ -96,11 +96,12 @@ def main_program(cam_, cam_url):
                         result = []
                         any_overlapping = 0
                         image_ = None
+                        cls = 'None'
                         for i in range(len(res)):
                             cls, confi, coordi = res[i]
 
                             log_file = open(dir_of_file + '/LogFile.txt', 'a')
-                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime())+': DL Model dectected, '+ cls.decode()+'\n')
+                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime())+': DL Model dectected, '+ str(cls)+'\n')
                             log_file.close()
 
                             # while cls identified is other than safe
@@ -139,7 +140,7 @@ def main_program(cam_, cam_url):
                                                  object_known=cls.decode(), image_path=save_detect_path)
 
                             log_file = open(dir_of_file + '/LogFile.txt', 'a')
-                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for Vessel Breach, ' + cls.decode()+'\n')
+                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for Vessel Breach, ' + str(cls)+'\n')
                             log_file.close()
 
                         # NOTIFICATION for DETECTION but, NO OVERLAPPING Scenario
@@ -167,7 +168,7 @@ def main_program(cam_, cam_url):
                                                      image_path=save_unknown_path)
 
                                 log_file = open(dir_of_file + '/LogFile.txt', 'a')
-                                log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for Vessel Not Breach, ' + cls.decode()+'\n')
+                                log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for Vessel Not Breach, ' + str(cls)+'\n')
                                 log_file.close()
 
                     # IF No Detection was made by YOLO Network
@@ -197,7 +198,7 @@ def main_program(cam_, cam_url):
                                                  image_path=save_unknown_path)
 
                             log_file = open(dir_of_file + '/LogFile.txt', 'a')
-                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for UnIdendified Object, ' + cls.decode()+'\n')
+                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for UnIdendified Object, ' + str(cls)+'\n')
                             log_file.close()
 
                 # if Frame is not Read

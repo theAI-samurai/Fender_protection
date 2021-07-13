@@ -3,7 +3,7 @@ feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
 param_id = 4
 
 [camera_2]
-feeder_path = D:/darknet_fender_protection/ship/test_data/5output.mp4
+feeder_path = rtsp://59.144.163.76:8544/live
 param_id = 5
 
 [camera_3]
