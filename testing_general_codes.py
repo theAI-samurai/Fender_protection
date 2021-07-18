@@ -441,3 +441,14 @@ for file in os.listdir(basepath):
         print(basepath+file)
 
 
+
+import cv2
+cap = cv2.VideoCapture('rtsp://59.144.163.76:8544/live', cv2.CAP_FFMPEG)
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    cv2.imshow('fkjbv', frame)
+    cv2.waitKey(1) & 0xFF
+
+
+

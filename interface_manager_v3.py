@@ -33,6 +33,7 @@ def main_program(cam_, cam_url):
     lst_markup_coord = None
 
     while True:
+
         global active_cams
         global VLC_PLAYER_OBJECT
         global start_timer
@@ -40,9 +41,13 @@ def main_program(cam_, cam_url):
         global ctr
         global reference_image_start_timer
 
+        # print('------active cams / restart status----------', active_cams, restart_status)
+
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
             if is_active:                                               # if True
+                restart_status = False
+                start_timer = 0
                 active_cams.append(cam_)
                 vlc_obj = vlc_stream_object_init_3(cam_url)
                 VLC_PLAYER_OBJECT.update({cam_: vlc_obj})
@@ -78,6 +83,7 @@ def main_program(cam_, cam_url):
                     # ------------------ MAIN EXECUTIONS on IMAGE ----------------------
                     # Read FRAME Image --> This is Original unchanged Image
                     image = cv2.imread(frame_path)
+                    # print('-------------------------------------FARME READ---------------------')
 
                     # Foreground Mask of Image
                     fgmask = fgbg1.apply(image)
@@ -208,10 +214,17 @@ def main_program(cam_, cam_url):
                         # start timer if Frame not Recieved
                         start_timer = time.time()
                     # check if timer is active for 120 sec or 2 mins
-                    if start_timer != 0 and time.time() - start_timer > 60:
+                    if start_timer != 0 and time.time() - start_timer > 20:
+                        # print('--------ENTERED here-------- ', start_timer)
                         active_cams.remove(cam_)            # delete cameraID from Active cam list
+                        VLC_PLAYER_OBJECT[cam_].stop()
+                        VLC_PLAYER_OBJECT[cam_].release()
                         del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
                         restart_status = True               # Status : True to reacquire objects for camID
                         camera_status_notification(cam_id=cam_, status_code=0)      # notification trigger to add
                         print('failed request sent for camID : ', cam_)
+
+                        log_file = open(dir_of_file + '/LogFile.txt', 'a')
+                        log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()) + ': Notification sent for UnIdendified Object, ' + str(cls) + '\n')
+                        log_file.close()
 
