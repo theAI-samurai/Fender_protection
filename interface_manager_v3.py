@@ -69,6 +69,10 @@ def main_program(cam_, cam_url):
                 read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
                                              path=frame_path)
 
+                fgmask = None
+                contours = []
+                draw = 0 
+
                 if read:                                                # Frame Received
                     start_timer = 0                                     # RESET timer = 0 as frame was received
                     # Replacing the Reference Fender Image after a fixed time
@@ -158,7 +162,7 @@ def main_program(cam_, cam_url):
                             # Area of Contour
                             for contour in contours:
                                 area = cv2.contourArea(contour)
-                                if 40 < area < 5000:
+                                if 400 < area < 5000:
                                     cv2.drawContours(image_, contour, -1, (200, 4, 14), 1)
                                     draw += 1
                             if image_ is not None or (draw > 0 and white_pixel_percent > 0.2):
@@ -192,7 +196,7 @@ def main_program(cam_, cam_url):
                         # Area of Contour
                         for contour in contours:
                             area = cv2.contourArea(contour)
-                            if 40 < area < 5000:
+                            if 400 < area < 5000:
                                 cv2.drawContours(image_, contours, -1, (191, 11, 11), 1)
                                 draw += 1
                         if draw > 0 and white_pixel_percent > 0.2:
@@ -201,7 +205,7 @@ def main_program(cam_, cam_url):
                             cv2.imwrite(save_unknown_path, image_)
 
                             # NOTIFICATION TRIGGER for Unknown Detection + No Detections
-                            # Note We will send notifications for unidenfied after every 15 seconds only 
+                            # Note We will send notifications for unidenfied after every 15 seconds only
                             if notification_timer == 0 or time.time() - notification_timer == 15:
                                 notification_timer = time.time()
                                 notification_trigger(cameraID=cam_, object='Unidentified Object',
