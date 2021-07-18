@@ -215,16 +215,14 @@ def main_program(cam_, cam_url):
                         start_timer = time.time()
                     # check if timer is active for 120 sec or 2 mins
                     if start_timer != 0 and time.time() - start_timer > 20:
-                        # print('--------ENTERED here-------- ', start_timer)
                         active_cams.remove(cam_)            # delete cameraID from Active cam list
                         VLC_PLAYER_OBJECT[cam_].stop()
                         VLC_PLAYER_OBJECT[cam_].release()
                         del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
                         restart_status = True               # Status : True to reacquire objects for camID
-                        camera_status_notification(cam_id=cam_, status_code=0)      # notification trigger to add
-                        print('failed request sent for camID : ', cam_)
+                        camera_status_notification(cam_id=cam_, status_code=0, remark='Failed Request sent')      # notification trigger to add
 
                         log_file = open(dir_of_file + '/LogFile.txt', 'a')
-                        log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()) + ': Notification sent for UnIdendified Object, ' + str(cls) + '\n')
+                        log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()) + ': Failed Request sent and Objects destroyed and killed for , ' + str(cam_) + '\n')
                         log_file.close()
 

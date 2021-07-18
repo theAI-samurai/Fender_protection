@@ -152,7 +152,7 @@ def camera_status_notification(cam_id, status_code, remark=None):
     except:
         # print('ERROR POST camStatus Notification FAILED for Camera ID : %(id)s' % {'id': cam_id})
         if remark is not None:
-            print(remark, cam_id)
+            print('REMARK : ', remark, cam_id)
         else:
             pass
 
