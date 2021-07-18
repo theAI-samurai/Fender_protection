@@ -61,8 +61,8 @@ def active_stream_initialize_vlc(cp, url):
         # sending notification to frontend for active Cam
         camera_status_notification(cam_id=cp, status_code=1, remark='Active Stream Initialize CODE : 1, ')
         mrk = get_markup_image(cp)                                    # Markup Image for Camera ID = cp
-        ref = get_reference_snapshot_image(cp)                        # Reference Image for Cam ID = cp
-        if mrk and ref:
+        # ref = get_reference_snapshot_image(cp)                        # Reference Image for Cam ID = cp
+        if mrk:  #and ref:
             return True
         else:
             return False

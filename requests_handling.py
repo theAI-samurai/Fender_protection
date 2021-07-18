@@ -57,6 +57,7 @@ def get_markup_image(cameraID):
                 save_image(img, name_for_file='markup', camera_id=cameraID)
                 return True
             else:
+                print('GET Request False for Reference Markup camera ID : ', cameraID)
                 return False
         except:
             print('ERROR  GET Request FAILED for markup image for Camera ID : %(id)s' % {'id': cameraID})
@@ -83,6 +84,7 @@ def get_reference_snapshot_image(cameraID):
                 save_image(img, name_for_file='fender', camera_id=cameraID)
                 return True
             else:
+                print('GET Request False for Reference Snapshot camera ID : ', cameraID)
                 return False
         except:
             print('ERROR GET Request FAILED for reference image for Camera ID : %(id)s' % {'id': cameraID})
