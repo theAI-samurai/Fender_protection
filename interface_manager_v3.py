@@ -225,6 +225,7 @@ def main_program(cam_, cam_url):
                     # check if timer is active for 120 sec or 2 mins
                     if start_timer != 0 and time.time() - start_timer > 20:
                         active_cams.remove(cam_)            # delete cameraID from Active cam list
+                        print(VLC_PLAYER_OBJECT[cam_])
                         VLC_PLAYER_OBJECT[cam_].stop()
                         VLC_PLAYER_OBJECT[cam_].release()
                         del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
