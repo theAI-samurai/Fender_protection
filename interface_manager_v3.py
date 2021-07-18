@@ -10,7 +10,7 @@ import shutil
 active_cams = []
 VLC_PLAYER_OBJECT = {}
 start_timer = 0
-reference_image_start_timer = time.time()
+notification_timer = 0
 ctr = 0
 
 fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
@@ -39,7 +39,7 @@ def main_program(cam_, cam_url):
         global start_timer
         global fgbg1
         global ctr
-        global reference_image_start_timer
+        global notification_timer
 
         # print('------active cams / restart status----------', active_cams, restart_status)
 
@@ -66,7 +66,7 @@ def main_program(cam_, cam_url):
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
-                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=5,
+                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
                                              path=frame_path)
 
                 if read:                                                # Frame Received
@@ -74,16 +74,14 @@ def main_program(cam_, cam_url):
                     # Replacing the Reference Fender Image after a fixed time
                     # &
                     # Dictionary of Markup Coordinates for Cam ID : cam_ in Every 6 HOURS
-                    if time.time() - reference_image_start_timer > 21600:
-                        lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
+                    # if time.time() - reference_image_start_timer > 600:
+                        # lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
                         # commenting the Reference File Replace 24-05-2021
                         # shutil.copy2(frame_path, dir_of_file + '/ship/reference_files/fender_' + str(cam_) + '.jpg')
-                        reference_image_start_timer = time.time()
+                        # reference_image_start_timer = time.time()
 
-                    # ------------------ MAIN EXECUTIONS on IMAGE ----------------------
                     # Read FRAME Image --> This is Original unchanged Image
                     image = cv2.imread(frame_path)
-                    # print('-------------------------------------FARME READ---------------------')
 
                     # Foreground Mask of Image
                     fgmask = fgbg1.apply(image)
@@ -146,6 +144,8 @@ def main_program(cam_, cam_url):
                             notification_trigger(cameraID=cam_, object='Vessel', status='Threat',
                                                  object_known=cls.decode(), image_path=save_detect_path)
 
+                            notification_timer = 0
+
                             log_file = open(dir_of_file + '/LogFile.txt', 'a')
                             log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for Vessel Breach, ' + str(cls)+'\n')
                             log_file.close()
@@ -174,6 +174,8 @@ def main_program(cam_, cam_url):
                                                      object_known='Known',
                                                      image_path=save_unknown_path)
 
+                                notification_timer = 0
+
                                 log_file = open(dir_of_file + '/LogFile.txt', 'a')
                                 log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for Vessel Not Breach, ' + str(cls)+'\n')
                                 log_file.close()
@@ -191,7 +193,7 @@ def main_program(cam_, cam_url):
                         for contour in contours:
                             area = cv2.contourArea(contour)
                             if 40 < area < 5000:
-                                cv2.drawContours(image_, contours, -1, (191, 11, 11), 2)
+                                cv2.drawContours(image_, contours, -1, (191, 11, 11), 1)
                                 draw += 1
                         if draw > 0 and white_pixel_percent > 0.2:
                             curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
@@ -199,14 +201,17 @@ def main_program(cam_, cam_url):
                             cv2.imwrite(save_unknown_path, image_)
 
                             # NOTIFICATION TRIGGER for Unknown Detection + No Detections
-                            notification_trigger(cameraID=cam_, object='Unidentified Object',
-                                                 status='System not Trained',
-                                                 object_known='UnKnown',
-                                                 image_path=save_unknown_path)
+                            # Note We will send notifications for unidenfied after every 15 seconds only 
+                            if notification_timer == 0 or time.time() - notification_timer == 15:
+                                notification_timer = time.time()
+                                notification_trigger(cameraID=cam_, object='Unidentified Object',
+                                                     status='System not Trained',
+                                                     object_known='UnKnown',
+                                                     image_path=save_unknown_path)
 
-                            log_file = open(dir_of_file + '/LogFile.txt', 'a')
-                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for UnIdendified Object, ' + str(cls)+'\n')
-                            log_file.close()
+                                log_file = open(dir_of_file + '/LogFile.txt', 'a')
+                                log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for UnIdendified Object, ' + str(cls)+'\n')
+                                log_file.close()
 
                 # if Frame is not Read
                 else:

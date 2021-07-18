@@ -85,7 +85,7 @@ def read_frames_using_vlc(player, delay_time, path):
     ---------------------------------------------------------------------------------"""
     
     player.play()  # --> play
-    time.sleep(1)
+    # time.sleep(1)
     # print('inside image codes, READ FRAMES, is playing check', player.is_playing())
     if player.is_playing():
         time.sleep(delay_time)
