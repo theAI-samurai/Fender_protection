@@ -1,5 +1,5 @@
 [camera_1]
-feeder_path = D:/darknet_fender_protection/ship/test_data/video2.mp4
+feeder_path = rtsp://59.144.163.76:8544/live
 param_id = 4
 
 [camera_2]
@@ -7,11 +7,11 @@ feeder_path = rtsp://59.144.163.76:8544/live
 param_id = 5
 
 [camera_3]
-feeder_path = D:/darknet_fender_protection/ship/test_data/oFile.mp4
+feeder_path = rtsp://59.144.163.76:8544/live
 param_id = 8
 
 [camera_4]
-feeder_path = D:/darknet_fender_protection/ship/test_data/3_test2.mp4
+feeder_path = rtsp://59.144.163.76:8544/live
 param_id = 9
 
 [RESOLUTION]
