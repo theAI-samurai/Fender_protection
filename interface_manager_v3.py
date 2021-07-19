@@ -11,9 +11,6 @@ from threading import Lock
 
 active_cams = []
 VLC_PLAYER_OBJECT = {}
-start_timer = 0
-notification_timer = 0
-ctr = 0
 
 fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 
@@ -33,7 +30,8 @@ def main_program(cam_, cam_url):
 
     restart_status = False
     lst_markup_coord = None
-    mutex = Lock()
+    start_timer = 0
+    notification_timer = 0
 
     while True:
 
@@ -41,8 +39,7 @@ def main_program(cam_, cam_url):
         global VLC_PLAYER_OBJECT
         global start_timer
         global fgbg1
-        global ctr
-        global notification_timer
+
 
         #print('----------------------------------------------------------------')
         print(active_cams)
@@ -72,7 +69,7 @@ def main_program(cam_, cam_url):
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
                 # mutex.acquire()
-                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
+                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=1,
                                              path=frame_path, camid=cam_)
 
                 #fgmask = None
