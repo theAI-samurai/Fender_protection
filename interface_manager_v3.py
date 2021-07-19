@@ -37,7 +37,6 @@ def main_program(cam_, cam_url):
 
         global active_cams
         global VLC_PLAYER_OBJECT
-        global start_timer
         global fgbg1
 
 
