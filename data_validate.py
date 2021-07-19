@@ -69,6 +69,8 @@ def active_stream_initialize_vlc(cp, url):
     else:
         # sending notification to frontend for inactive Cam
         camera_status_notification(cam_id=cp, status_code=0, remark='Active Stream Initialize CODE : 0, ')
+        player.stop()
+        player.release()
         return False
 
 

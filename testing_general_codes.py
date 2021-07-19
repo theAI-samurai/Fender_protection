@@ -451,4 +451,28 @@ while cap.isOpened():
     cv2.waitKey(1) & 0xFF
 
 
+import vlc
+import time
+
+start = time.time()
+ctr = 0
+
+obj = vlc.MediaPlayer()
+media = vlc.Media('D:/darknet_fender_protection/ship/test_data/5output.mp4')
+obj.set_media(media)
+obj.play()
+
+while time.time() - start < 20:
+    print(obj.is_playing())
+    time.sleep(1)
+
+obj.stop()
+obj.release()
+
+
+
+
+
+
+
 

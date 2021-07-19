@@ -41,7 +41,9 @@ def main_program(cam_, cam_url):
         global ctr
         global notification_timer
 
-        # print('------active cams / restart status----------', active_cams, restart_status)
+        print('---------------------------------------------------------------------------')
+        print(VLC_PLAYER_OBJECT)
+        print('---------------------------------------------------------------------------')
 
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
