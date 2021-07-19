@@ -6,6 +6,7 @@ import time
 import math
 import shutil
 import gc
+from threading import Lock
 
 
 active_cams = []
@@ -32,6 +33,7 @@ def main_program(cam_, cam_url):
 
     restart_status = False
     lst_markup_coord = None
+    mutex = Lock()
 
     while True:
 
@@ -41,6 +43,10 @@ def main_program(cam_, cam_url):
         global fgbg1
         global ctr
         global notification_timer
+
+        #print('----------------------------------------------------------------')
+        print(active_cams, VLC_PLAYER_OBJECT)
+        #print('----------------------------------------------------------------')
 
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
@@ -65,12 +71,15 @@ def main_program(cam_, cam_url):
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
+                mutex.acquire()
                 read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
-                                             path=frame_path)
+                                             path=frame_path, camid=cam_)
 
-                fgmask = None
-                contours = []
-                draw = 0 
+                #fgmask = None
+                #contours = []
+                #draw = 0
+
+                mutex.release()
 
                 if read:                                                # Frame Received
                     start_timer = 0                                     # RESET timer = 0 as frame was received
@@ -227,7 +236,7 @@ def main_program(cam_, cam_url):
                         VLC_PLAYER_OBJECT[cam_].stop()
                         VLC_PLAYER_OBJECT[cam_].release()
                         del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
-                        gc.collect()
+                        gc.collect()                        # Garbage Collection
                         restart_status = True               # Status : True to reacquire objects for camID
                         camera_status_notification(cam_id=cam_, status_code=0, remark='Failed Request sent')      # notification trigger to add
 
