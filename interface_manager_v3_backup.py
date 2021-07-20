@@ -27,6 +27,7 @@ def main_program(cam_, cam_url):
 
     restart_status = False
     lst_markup_coord = None
+
     start_timer = 0
     notification_timer = 0
     fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
@@ -36,9 +37,7 @@ def main_program(cam_, cam_url):
         global active_cams
         global VLC_PLAYER_OBJECT
 
-        # print('----------------------------------------------------------------')
         print(active_cams)
-        # print('----------------------------------------------------------------')
 
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
@@ -53,6 +52,7 @@ def main_program(cam_, cam_url):
             # MARKUP IMAGE path
             markup_img_pa = dir_of_file + '/ship/reference_files/markup_' + str(cam_) + '.jpg'
             # MAXIMUM & MINIMUM coordinates for Markup Image
+            # fender_markup_image is now --> Markup image
             markup_image, minx, miny, maxx, maxy = fender_coordi(path_=markup_img_pa)
 
             # Getting Markup Coordinate for OVERLAP CALCULATIONS
@@ -62,10 +62,7 @@ def main_program(cam_, cam_url):
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
-
-                print('READ Frames for :', cam_)
-
-                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=1,
+                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
                                              path=frame_path, camid=cam_)
 
                 fgmask = None
@@ -90,6 +87,7 @@ def main_program(cam_, cam_url):
 
                     # YOLO v3 Detection Module is called on the FRAME read
                     res = obj_detect.detect(frame_path.encode('ascii'))
+
                     cls = 'None'
                     # IF Any detection was made by YOLO Network
                     if len(res) != 0:
@@ -101,7 +99,7 @@ def main_program(cam_, cam_url):
                             cls, confi, coordi = res[i]
 
                             log_file = open(dir_of_file + '/LogFile.txt', 'a')
-                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime())+': DL Model dectected, '+ str(cls)+'\n')
+                            log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())+': DL Model dectected, '+ str(cls)+'\n')
                             log_file.close()
 
                             # while cls identified is other than safe
@@ -178,7 +176,6 @@ def main_program(cam_, cam_url):
                     # IF No Detection was made by YOLO Network
                     else:
                         # OVERLAPPING Markup on FRAME image
-                        print(type(image), type(markup_image), image.shape, markup_image.shape, cam_)
                         image_ = cv2.addWeighted(image, 1, markup_image, 1, 0)
 
                         # Finding CONTOUR on BW Masked Image
@@ -220,12 +217,10 @@ def main_program(cam_, cam_url):
                         VLC_PLAYER_OBJECT[cam_].stop()
                         VLC_PLAYER_OBJECT[cam_].release()
                         del VLC_PLAYER_OBJECT[cam_]         # del VLC object of cameraID
-                        gc.collect()                        # Garbage Collection
-                        time.sleep(1)
+                        gc.collect()
                         restart_status = True               # Status : True to reacquire objects for camID
                         camera_status_notification(cam_id=cam_, status_code=0, remark='Failed Request sent')      # notification trigger to add
 
                         log_file = open(dir_of_file + '/LogFile.txt', 'a')
                         log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()) + ': Failed Request sent and Objects destroyed and killed for , ' + str(cam_) + '\n')
                         log_file.close()
-

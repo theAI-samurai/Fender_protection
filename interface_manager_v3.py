@@ -15,7 +15,6 @@ VLC_PLAYER_OBJECT = {}
 net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                  wgtPath=dir_of_file + '/ship/cfg/yolov3_full_ship.weights')
 
-obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=0)
 
 if os.path.exists(dir_of_file + '/ship/unknown_objects'):
     pass
@@ -31,6 +30,7 @@ def main_program(cam_, cam_url):
     start_timer = 0
     notification_timer = 0
     fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
+    obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=0)
 
     while True:
 
@@ -67,7 +67,7 @@ def main_program(cam_, cam_url):
 
                 fgmask = None
                 contours = []
-                draw = 0 
+                draw = 0
 
                 if read:                                                # Frame Received
                     start_timer = 0                                     # RESET timer = 0 as frame was received
@@ -224,4 +224,3 @@ def main_program(cam_, cam_url):
                         log_file = open(dir_of_file + '/LogFile.txt', 'a')
                         log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()) + ': Failed Request sent and Objects destroyed and killed for , ' + str(cam_) + '\n')
                         log_file.close()
-
