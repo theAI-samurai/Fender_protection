@@ -62,7 +62,7 @@ def main_program(cam_, cam_url):
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
-                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
+                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=2,
                                              path=frame_path, camid=cam_)
 
                 fgmask = None

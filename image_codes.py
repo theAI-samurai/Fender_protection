@@ -78,6 +78,7 @@ def read_frames_using_vlc(player, delay_time, path, camid):
         player:         VLC Player Object
         delay_time:     Delay parameter for time.sleep()
         path:           Path where image is written
+        camid:          Camera ID
 
     Returns:
             True :      When frame has been Read and Saved
@@ -85,12 +86,15 @@ def read_frames_using_vlc(player, delay_time, path, camid):
     ---------------------------------------------------------------------------------"""
     
     player.play()  # --> play
-    # time.sleep(1)
-    print('inside image codes, READ FRAMES, is playing check', player.is_playing(), camid)
+    print('--------------------------------------------------- is playing check', player.is_playing(), camid)
     if player.is_playing():
         time.sleep(delay_time)
-        player.video_take_snapshot(0, path, 960, 540)
-        return True
+        snap = player.video_take_snapshot(0, path, 960, 540)
+        print('-----------------------------------------------VLC SNAPSHOT taken or not ? :', snap, camid)
+        if snap == 0:
+            return True
+        else:
+            return False
     else:
         return False
 
