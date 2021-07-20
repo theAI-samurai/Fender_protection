@@ -15,7 +15,6 @@ VLC_PLAYER_OBJECT = {}
 net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
                  wgtPath=dir_of_file + '/ship/cfg/yolov3_full_ship.weights')
 
-obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=0)
 
 if os.path.exists(dir_of_file + '/ship/unknown_objects'):
     pass
@@ -32,6 +31,7 @@ def main_program(cam_, cam_url):
         start_timer = 0
         notification_timer = 0
         fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
+        obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=0)
 
         while True:
 
