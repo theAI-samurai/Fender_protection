@@ -36,9 +36,7 @@ def main_program(cam_, cam_url):
         global active_cams
         global VLC_PLAYER_OBJECT
 
-        # print('----------------------------------------------------------------')
         print(active_cams)
-        # print('----------------------------------------------------------------')
 
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
@@ -62,8 +60,6 @@ def main_program(cam_, cam_url):
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
-
-                print('READ Frames for :', cam_)
 
                 read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=1,
                                              path=frame_path, camid=cam_)
@@ -178,7 +174,6 @@ def main_program(cam_, cam_url):
                     # IF No Detection was made by YOLO Network
                     else:
                         # OVERLAPPING Markup on FRAME image
-                        print(type(image), type(markup_image), image.shape, markup_image.shape, cam_)
                         image_ = cv2.addWeighted(image, 1, markup_image, 1, 0)
 
                         # Finding CONTOUR on BW Masked Image
