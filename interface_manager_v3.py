@@ -63,6 +63,8 @@ def main_program(cam_, cam_url):
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
 
+                print('READ Frames for :', cam_)
+
                 read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=1,
                                              path=frame_path, camid=cam_)
 
