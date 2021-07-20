@@ -4,11 +4,11 @@ import threading
 
 thread = []
 
-#''''
+#'''
 for e in all_camera_data.keys():
     thread.append(threading.Thread(target=main_program, args=(e, all_camera_data[e])))
     thread[-1].start()
-    time.sleep(1)
+    time.sleep(2)
 
 for item in thread:
     item.join()
