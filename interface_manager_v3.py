@@ -178,6 +178,7 @@ def main_program(cam_, cam_url):
                     # IF No Detection was made by YOLO Network
                     else:
                         # OVERLAPPING Markup on FRAME image
+                        print(type(image), type(markup_image), cam_)
                         image_ = cv2.addWeighted(image, 1, markup_image, 1, 0)
 
                         # Finding CONTOUR on BW Masked Image
