@@ -6,13 +6,10 @@ import time
 import math
 import shutil
 import gc
-from threading import Lock
 
 
 active_cams = []
 VLC_PLAYER_OBJECT = {}
-
-fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 
 # loading Deep learning model
 net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
@@ -32,17 +29,16 @@ def main_program(cam_, cam_url):
     lst_markup_coord = None
     start_timer = 0
     notification_timer = 0
+    fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 
     while True:
 
         global active_cams
         global VLC_PLAYER_OBJECT
-        global fgbg1
 
-
-        #print('----------------------------------------------------------------')
+        # print('----------------------------------------------------------------')
         print(active_cams)
-        #print('----------------------------------------------------------------')
+        # print('----------------------------------------------------------------')
 
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
@@ -57,7 +53,6 @@ def main_program(cam_, cam_url):
             # MARKUP IMAGE path
             markup_img_pa = dir_of_file + '/ship/reference_files/markup_' + str(cam_) + '.jpg'
             # MAXIMUM & MINIMUM coordinates for Markup Image
-            # fender_markup_image is now --> Markup image
             markup_image, minx, miny, maxx, maxy = fender_coordi(path_=markup_img_pa)
 
             # Getting Markup Coordinate for OVERLAP CALCULATIONS
@@ -67,26 +62,16 @@ def main_program(cam_, cam_url):
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
-                # mutex.acquire()
+
                 read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=1,
                                              path=frame_path, camid=cam_)
 
-                #fgmask = None
-                #contours = []
-                #draw = 0
-
-                # mutex.release()
+                fgmask = None
+                contours = []
+                draw = 0
 
                 if read:                                                # Frame Received
                     start_timer = 0                                     # RESET timer = 0 as frame was received
-                    # Replacing the Reference Fender Image after a fixed time
-                    # &
-                    # Dictionary of Markup Coordinates for Cam ID : cam_ in Every 6 HOURS
-                    # if time.time() - reference_image_start_timer > 600:
-                        # lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
-                        # commenting the Reference File Replace 24-05-2021
-                        # shutil.copy2(frame_path, dir_of_file + '/ship/reference_files/fender_' + str(cam_) + '.jpg')
-                        # reference_image_start_timer = time.time()
 
                     # Read FRAME Image --> This is Original unchanged Image
                     image = cv2.imread(frame_path)
