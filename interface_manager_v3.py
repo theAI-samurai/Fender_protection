@@ -24,6 +24,8 @@ else:
 
 
 def main_program(cam_, cam_url):
+    global active_cams
+    global VLC_PLAYER_OBJECT
     try:
         restart_status = False
         lst_markup_coord = None
@@ -32,9 +34,6 @@ def main_program(cam_, cam_url):
         fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 
         while True:
-
-            global active_cams
-            global VLC_PLAYER_OBJECT
 
             print(active_cams)
 
@@ -226,4 +225,8 @@ def main_program(cam_, cam_url):
 
     except:
         print('inside except', cam_)
-        pass
+        active_cams.remove(cam_)  # delete cameraID from Active cam list
+        VLC_PLAYER_OBJECT[cam_].stop()
+        VLC_PLAYER_OBJECT[cam_].release()
+        del VLC_PLAYER_OBJECT[cam_]  # del VLC object of cameraID
+        gc.collect()  # Garbage Collection
