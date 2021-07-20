@@ -225,4 +225,5 @@ def main_program(cam_, cam_url):
                             log_file.close()
 
     except:
+        print('inside except', cam_)
         pass
