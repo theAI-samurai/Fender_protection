@@ -38,7 +38,7 @@ def main_program(cam_, cam_url):
         global VLC_PLAYER_OBJECT
         global result
 
-        print(active_cams)
+        print(cam_, active_cams)
 
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
@@ -75,6 +75,7 @@ def main_program(cam_, cam_url):
 
                     # Read FRAME Image --> This is Original unchanged Image
                     image = cv2.resize(cv2.imread(frame_path), (int(WIDTH), int(HEIGHT)))
+                    del frame_path
 
                     # Foreground Mask of Image
                     fgmask = fgbg1.apply(image)
@@ -94,9 +95,8 @@ def main_program(cam_, cam_url):
                     # res = obj_detect.detect(frame_path.encode('ascii'))
                     # print('-----------------------', result)
                     res = result[cam_]
+                    result.update({cam_: []})
                     x.join()
-                    del x
-                    gc.collect()
 
                     cls = 'None'
                     # IF Any detection was made by YOLO Network
