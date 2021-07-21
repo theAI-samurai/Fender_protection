@@ -53,7 +53,6 @@ def main_program(cam_, cam_url):
                 del vlc_obj
             else:
                 gc.collect()
-                break
         else:                                                           # if camID is active
             # MARKUP IMAGE path
             markup_img_pa = dir_of_file + '/ship/reference_files/markup_' + str(cam_) + '.jpg'
