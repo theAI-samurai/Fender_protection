@@ -6,7 +6,7 @@ import time
 import math
 import shutil
 import gc
-from threading import Thread, Lock
+
 
 active_cams = []
 VLC_PLAYER_OBJECT = {}
@@ -87,14 +87,9 @@ def main_program(cam_, cam_url):
                         break
 
                     # YOLO v3 Detection Module is called on the FRAME read
+                    res = obj_detect.detect(frame_path.encode('ascii'))
 
-                    x = Thread(target=obj_detect.detect_v2, args=(str(cam_)))
-                    x.start()
-
-                    # res = obj_detect.detect(frame_path.encode('ascii'))
-                    # print('-----------------------', result)
-                    res = result[cam_]
-                    x.join()
+                    print('-----------------------', result)
 
                     cls = 'None'
                     # IF Any detection was made by YOLO Network

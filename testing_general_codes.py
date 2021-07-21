@@ -469,6 +469,24 @@ while time.time() - start < 20:
 obj.stop()
 obj.release()
 
+#-------------------- threading obeject return--------------
+
+from threading import Thread, Lock
+
+
+def mul(x):
+    prod = float(x)*float(x)*float(x)
+    print('prod', prod)
+    return prod
+
+
+while ctr <6:
+    t = Thread(target=mul, args=('2'))
+    t.start()
+    print('from while', t)
+
+
+
 
 
 

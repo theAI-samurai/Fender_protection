@@ -86,11 +86,10 @@ def read_frames_using_vlc(player, delay_time, path, camid):
     ---------------------------------------------------------------------------------"""
     
     player.play()  # --> play
-    print('--------------------------------------------------- is playing check', player.is_playing(), camid)
     if player.is_playing():
         time.sleep(delay_time)
         snap = player.video_take_snapshot(0, path, 960, 540)
-        print('-----------------------------------------------VLC SNAPSHOT taken or not ? :', snap, camid)
+        print('--------------------------------------------------- is playing check', player.is_playing(), camid)
         if snap == 0:
             return True
         else:

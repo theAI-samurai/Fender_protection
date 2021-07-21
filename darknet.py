@@ -4,6 +4,9 @@ import cv2
 from ctypes import *
 import random
 import os
+from threading import Thread, Lock
+
+mutex = Lock()
 
 
 def sample(probs):
@@ -234,6 +237,9 @@ def model_load(cfgPath, wgtPath):
     return net
 
 
+result = {'4': [], '5':[], '8':[], '9':[]}
+
+
 class ObjectDetection :
     def __init__(self, dataPath, netwrk, camID):
         # self.net = load_net(cfgPath.encode('ascii'), wgtPath.encode('ascii'), 0)
@@ -286,6 +292,28 @@ class ObjectDetection :
         free_detections(dets, num)
         return res
 
+    def detect_v2(self, camid, thresh=.5, hier_thresh=.7, nms=.45):
 
+        image_path = ('D:/darknet_fender_protection/ship/reference_files/'+str(camid)+'.jpg').encode('ascii')
 
-
+        mutex.acquire()
+        im = load_image(image_path, 0, 0)                                # LOADS IMAGE IN MEMORY --image.c
+        num = c_int(0)
+        pnum = pointer(num)
+        predict_image(self.net, im)
+        dets = get_network_boxes(self.net, im.w, im.h, thresh, hier_thresh, None, 0, pnum,0)
+        num = pnum[0]
+        if nms:
+            do_nms_obj(dets, num, self.meta.classes, nms)
+        res = []
+        for j in range(num):
+            for i in range(self.meta.classes):
+                if dets[j].prob[i] > 0:
+                    b = dets[j].bbox                                                            # getting box coordinate
+                    res.append((self.meta.names[i], dets[j].prob[i], (b.x, b.y, b.w, b.h)))
+        res = sorted(res, key=lambda x: -x[1])
+        free_image(im)
+        free_detections(dets, num)
+        result.update({self.cam_id: res})
+        mutex.release()
+        return res

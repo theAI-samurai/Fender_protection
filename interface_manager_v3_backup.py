@@ -91,7 +91,7 @@ def main_program(cam_, cam_url):
                     cls = 'None'
                     # IF Any detection was made by YOLO Network
                     if len(res) != 0:
-                        result = []
+
                         any_overlapping = 0
                         image_ = None
 
@@ -112,7 +112,7 @@ def main_program(cam_, cam_url):
                                                                 max_x=xma, max_y=yma)
                                 if overlap:
                                     any_overlapping += 1
-                                result.append((cls, confi, (xmi, ymi), (xma, yma)))
+
 
                                 # Rectangle marking for BOAT/ SHIP/ THREAT coordinates
                                 image_ = cv2.rectangle(image, (math.floor(xmi), math.floor(ymi)),
