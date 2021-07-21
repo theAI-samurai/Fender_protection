@@ -76,6 +76,7 @@ def main_program(cam_, cam_url):
                     # Read FRAME Image --> This is Original unchanged Image
                     image = cv2.resize(cv2.imread(frame_path), (int(WIDTH), int(HEIGHT)))
                     del frame_path
+                    print('----deletd-----')
 
                     # Foreground Mask of Image
                     fgmask = fgbg1.apply(image)
