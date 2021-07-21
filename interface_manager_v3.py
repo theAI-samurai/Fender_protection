@@ -88,7 +88,7 @@ def main_program(cam_, cam_url):
                         number_of_white_pix = np.sum(fgmask >= 250)
                         white_pixel_percent = (number_of_white_pix / 518400)*100
                     else:
-                        break
+                        gc.collect()
 
                     # YOLO v3 Detection Module is called on the FRAME read
 
@@ -139,6 +139,8 @@ def main_program(cam_, cam_url):
                                 # Thickness = -1 Fills the rectangle with specified Color
                                 fgmask = cv2.rectangle(fgmask, (xmi, ymi), (xma, yma),
                                                        (0, 0, 0), thickness=-1)
+                            else:
+                                gc.collect()
 
                         # NOTIFICATION TRIGGER for OVERLAPPING Scenario
                         if any_overlapping > 0:
@@ -215,6 +217,10 @@ def main_program(cam_, cam_url):
                                 log_file = open(dir_of_file + '/LogFile.txt', 'a')
                                 log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for UnIdendified Object, ' + str(cls)+'\n')
                                 log_file.close()
+                            else:
+                                gc.collect()
+                        else:
+                            gc.collect()
 
                 # if Frame is not Read
                 else:
@@ -234,3 +240,7 @@ def main_program(cam_, cam_url):
                         log_file = open(dir_of_file + '/LogFile.txt', 'a')
                         log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()) + ': Failed Request sent and Objects destroyed and killed for , ' + str(cam_) + '\n')
                         log_file.close()
+                    else:
+                        gc.collect()
+            else:
+                gc.collect()
