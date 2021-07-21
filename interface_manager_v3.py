@@ -49,6 +49,9 @@ def main_program(cam_, cam_url):
                 vlc_obj = vlc_stream_object_init_3(cam_url)
                 VLC_PLAYER_OBJECT.update({cam_: vlc_obj})
                 del vlc_obj
+            else:
+                gc.collect()
+                break
         else:                                                           # if camID is active
             # MARKUP IMAGE path
             markup_img_pa = dir_of_file + '/ship/reference_files/markup_' + str(cam_) + '.jpg'
