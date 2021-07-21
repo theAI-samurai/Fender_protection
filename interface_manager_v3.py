@@ -95,6 +95,8 @@ def main_program(cam_, cam_url):
                     # print('-----------------------', result)
                     res = result[cam_]
                     x.join()
+                    del x
+                    gc.collect()
 
                     cls = 'None'
                     # IF Any detection was made by YOLO Network
@@ -219,7 +221,7 @@ def main_program(cam_, cam_url):
                         # start timer if Frame not Recieved
                         start_timer = time.time()
                     # check if timer is active for 120 sec or 2 mins
-                    if start_timer != 0 and time.time() - start_timer > 20:
+                    if start_timer != 0 and time.time() - start_timer > 15:
                         active_cams.remove(cam_)            # delete cameraID from Active cam list
                         VLC_PLAYER_OBJECT[cam_].stop()
                         VLC_PLAYER_OBJECT[cam_].release()
