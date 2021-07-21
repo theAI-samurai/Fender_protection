@@ -12,6 +12,7 @@ import cv2
 import vlc
 import time
 from requests_handling import *
+import gc
 
 
 def active_streams_initialize_vlc(data):
@@ -65,12 +66,14 @@ def active_stream_initialize_vlc(cp, url):
         if mrk:  #and ref:
             return True
         else:
+            gc.collect()
             return False
     else:
         # sending notification to frontend for inactive Cam
         camera_status_notification(cam_id=cp, status_code=0, remark='Active Stream Initialize CODE : 0, ')
         player.stop()
         player.release()
+        gc.collect()
         return False
 
 

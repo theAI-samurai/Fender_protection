@@ -294,9 +294,9 @@ class ObjectDetection :
 
     def detect_v2(self, camid, thresh=.5, hier_thresh=.7, nms=.45):
 
-        image_path = ('D:/darknet_fender_protection/ship/reference_files/'+str(camid)+'.jpg').encode('ascii')
-
         mutex.acquire()
+        image_path = ('D:/darknet_fender_protection/ship/reference_files/' + str(camid) + '.jpg').encode('ascii')
+        print('Inside Acquire for ', camid)
         im = load_image(image_path, 0, 0)                                # LOADS IMAGE IN MEMORY --image.c
         num = c_int(0)
         pnum = pointer(num)
@@ -316,4 +316,5 @@ class ObjectDetection :
         free_detections(dets, num)
         result.update({self.cam_id: res})
         mutex.release()
-        return res
+        print('Relaesed for ', camid)
+

@@ -75,8 +75,6 @@ def main_program(cam_, cam_url):
 
                     # Read FRAME Image --> This is Original unchanged Image
                     image = cv2.resize(cv2.imread(frame_path), (int(WIDTH), int(HEIGHT)))
-                    del frame_path
-                    print('----deletd-----')
 
                     # Foreground Mask of Image
                     fgmask = fgbg1.apply(image)
@@ -92,9 +90,7 @@ def main_program(cam_, cam_url):
 
                     x = Thread(target=obj_detect.detect_v2, args=(str(cam_)))
                     x.start()
-
                     # res = obj_detect.detect(frame_path.encode('ascii'))
-                    # print('-----------------------', result)
                     res = result[cam_]
                     result.update({cam_: []})
                     x.join()
