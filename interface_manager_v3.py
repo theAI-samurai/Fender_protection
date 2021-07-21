@@ -23,6 +23,7 @@ else:
 
 
 def main_program(cam_, cam_url):
+    gc.collect()
 
     restart_status = False
     lst_markup_coord = None
@@ -33,6 +34,7 @@ def main_program(cam_, cam_url):
     obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=cam_)
 
     while True:
+        gc.collect()
 
         global active_cams
         global VLC_PLAYER_OBJECT
