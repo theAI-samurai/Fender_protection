@@ -77,6 +77,28 @@ def active_stream_initialize_vlc(cp, url):
         return False
 
 
+def active_stream_initialize_opencv_v2(cp, url):
+    cap = cv2.VideoCapture(url, cv2.CAP_FFMPEG)
+    print('capture created for CAMERA : ', cp)
+    print(url)
+    st = time.time()
+    while time.time() - st < 2:
+        ret, frame = cap.read()
+        if frame is not None:
+            camera_status_notification(cam_id=cp, status_code=1, remark='Active Stream Initialize CODE : 1, ')
+            mrk = get_markup_image(cp)  # Markup Image for Camera ID = cp
+            cap.release()
+            del [cap, ret, frame]
+            gc.collect()
+            return True
+        else:
+            camera_status_notification(cam_id=cp, status_code=0, remark='Active Stream Initialize CODE : 0, ')
+            cap.release()
+            del [cap, ret, frame]
+            gc.collect()
+            return False
+
+
 def active_streams_initialize_OPENCV(data):
     """ --------------
     this function checks which IP streams provided in the conf.txt are active using OPENCV

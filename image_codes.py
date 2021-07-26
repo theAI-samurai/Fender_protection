@@ -98,6 +98,32 @@ def read_frames_using_vlc(player, delay_time, path, camid):
         return False
 
 
+def read_frames_using_opencv(p_obj, delay_time, path, camid):
+    """--------------------------------------------------------------------------------
+    This Function Reads frames from OPENCV Videocapture object and saves in directory
+    Args:
+        p_obj       :   OPENCV Videocapture Object
+        delay_time  :   Delay parameter for time.sleep()
+        path        :   Path where image is written
+        camid       :   Camera ID
+
+    Returns:
+            True, True      :   When isOpened is True and Ret/Frame has been Read and Saved
+            True, False     :   When isOpened is True but Ret/Frame has not been Read and Saved
+            False, False    :   When isOpened is False and Ret/Frame has not been Read and Saved
+    ---------------------------------------------------------------------------------"""
+    if p_obj.isOpened():
+        ret, frame = p_obj.read()
+        print('---------------------------------------------------- is opened check :', camid, p_obj.isOpened(), ret)
+        if ret:
+            cv2.imwrite(filename=path, img=frame)
+            return True, True
+        else:
+            return True, False
+    else:
+        return False, False
+
+
 def fender_coordi(path_):
     """-----------------------------------------------------
     this function calculates the (X_min,Y_min) and (X_max, Y_max)
