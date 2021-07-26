@@ -6,10 +6,14 @@ import time
 import math
 import shutil
 import gc
+from threading import Thread, Lock
 
 active_cams = []
 VLC_PLAYER_OBJECT = {}
 
+# loading Deep learning model
+net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
+                 wgtPath=dir_of_file + '/ship/cfg/yolov3_full_ship.weights')
 
 
 if os.path.exists(dir_of_file + '/ship/unknown_objects'):
@@ -19,6 +23,7 @@ else:
 
 
 def main_program(cam_, cam_url):
+    gc.collect()
 
     restart_status = False
     lst_markup_coord = None
@@ -26,19 +31,16 @@ def main_program(cam_, cam_url):
     start_timer = 0
     notification_timer = 0
     fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
-
-    # loading Deep learning model
-    net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
-                     wgtPath=dir_of_file + '/ship/cfg/yolov3_full_ship.weights')
-
-    obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=0)
+    obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=cam_)
 
     while True:
+        gc.collect()
 
         global active_cams
         global VLC_PLAYER_OBJECT
+        global result
 
-        print(active_cams)
+        print(cam_, active_cams)
 
         if cam_ not in active_cams:                                     # if camID is inactive initialize the camera
             is_active = active_stream_initialize_vlc(cam_, cam_url)     # checks if frame available
@@ -49,6 +51,8 @@ def main_program(cam_, cam_url):
                 vlc_obj = vlc_stream_object_init_3(cam_url)
                 VLC_PLAYER_OBJECT.update({cam_: vlc_obj})
                 del vlc_obj
+            else:
+                gc.collect()
         else:                                                           # if camID is active
             # MARKUP IMAGE path
             markup_img_pa = dir_of_file + '/ship/reference_files/markup_' + str(cam_) + '.jpg'
@@ -63,7 +67,7 @@ def main_program(cam_, cam_url):
             if not restart_status:
                 # Read FRAME IMAGE Path
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
-                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
+                read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=2,
                                              path=frame_path, camid=cam_)
 
                 fgmask = None
@@ -87,7 +91,13 @@ def main_program(cam_, cam_url):
                         gc.collect()
 
                     # YOLO v3 Detection Module is called on the FRAME read
-                    res = obj_detect.detect(frame_path.encode('ascii'))
+
+                    x = Thread(target=obj_detect.detect_v2, args=(str(cam_)))
+                    x.start()
+                    # res = obj_detect.detect(frame_path.encode('ascii'))
+                    res = result[cam_]
+                    result.update({cam_: []})
+                    x.join()
 
                     cls = 'None'
                     # IF Any detection was made by YOLO Network
@@ -114,7 +124,6 @@ def main_program(cam_, cam_url):
                                 if overlap:
                                     any_overlapping += 1
 
-
                                 # Rectangle marking for BOAT/ SHIP/ THREAT coordinates
                                 image_ = cv2.rectangle(image, (math.floor(xmi), math.floor(ymi)),
                                                        (math.floor(xma), math.floor(yma)),
@@ -130,6 +139,8 @@ def main_program(cam_, cam_url):
                                 # Thickness = -1 Fills the rectangle with specified Color
                                 fgmask = cv2.rectangle(fgmask, (xmi, ymi), (xma, yma),
                                                        (0, 0, 0), thickness=-1)
+                            else:
+                                gc.collect()
 
                         # NOTIFICATION TRIGGER for OVERLAPPING Scenario
                         if any_overlapping > 0:
@@ -206,6 +217,10 @@ def main_program(cam_, cam_url):
                                 log_file = open(dir_of_file + '/LogFile.txt', 'a')
                                 log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S",time.localtime()) + ': Notification sent for UnIdendified Object, ' + str(cls)+'\n')
                                 log_file.close()
+                            else:
+                                gc.collect()
+                        else:
+                            gc.collect()
 
                 # if Frame is not Read
                 else:
@@ -213,7 +228,7 @@ def main_program(cam_, cam_url):
                         # start timer if Frame not Recieved
                         start_timer = time.time()
                     # check if timer is active for 120 sec or 2 mins
-                    if start_timer != 0 and time.time() - start_timer > 20:
+                    if start_timer != 0 and time.time() - start_timer > 15:
                         active_cams.remove(cam_)            # delete cameraID from Active cam list
                         VLC_PLAYER_OBJECT[cam_].stop()
                         VLC_PLAYER_OBJECT[cam_].release()
@@ -225,3 +240,7 @@ def main_program(cam_, cam_url):
                         log_file = open(dir_of_file + '/LogFile.txt', 'a')
                         log_file.write(time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime()) + ': Failed Request sent and Objects destroyed and killed for , ' + str(cam_) + '\n')
                         log_file.close()
+                    else:
+                        gc.collect()
+            else:
+                gc.collect()

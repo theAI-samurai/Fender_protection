@@ -83,7 +83,7 @@ def main_program(cam_, cam_url):
                         number_of_white_pix = np.sum(fgmask >= 250)
                         white_pixel_percent = (number_of_white_pix / 518400)*100
                     else:
-                        break
+                        gc.collect()
 
                     # YOLO v3 Detection Module is called on the FRAME read
                     res = obj_detect.detect(frame_path.encode('ascii'))
