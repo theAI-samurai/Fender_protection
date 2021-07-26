@@ -139,9 +139,11 @@ def get_cuda_version_of_system():
 
 ver = get_cuda_version_of_system()
 if ver == '11.0':
-    lib = CDLL('yolo_cpp_dll_11.0.dll', RTLD_GLOBAL)
+    #lib = CDLL('yolo_cpp_dll_11.0.dll', RTLD_GLOBAL)
+    lib = CDLL('yolo_cpp_dll_no_gpu.dll', RTLD_GLOBAL)
 elif ver == '10.1':
-    lib = CDLL('yolo_cpp_dll_10.1.dll', RTLD_GLOBAL)
+    #lib = CDLL('yolo_cpp_dll_10.1.dll', RTLD_GLOBAL)
+    lib = CDLL('yolo_cpp_dll_no_gpu.dll', RTLD_GLOBAL)
 
 
 lib.network_width.argtypes = [c_void_p]
@@ -296,7 +298,6 @@ class ObjectDetection :
 
         mutex.acquire()
         image_path = ('D:/darknet_fender_protection/ship/reference_files/' + str(camid) + '.jpg').encode('ascii')
-        print('Inside Acquire for ', camid)
         im = load_image(image_path, 0, 0)                                # LOADS IMAGE IN MEMORY --image.c
         num = c_int(0)
         pnum = pointer(num)
@@ -316,5 +317,4 @@ class ObjectDetection :
         free_detections(dets, num)
         result.update({self.cam_id: res})
         mutex.release()
-        print('Relaesed for ', camid)
 
