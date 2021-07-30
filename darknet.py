@@ -139,11 +139,11 @@ def get_cuda_version_of_system():
 
 ver = get_cuda_version_of_system()
 if ver == '11.0':
-    #lib = CDLL('yolo_cpp_dll_11.0.dll', RTLD_GLOBAL)
-    lib = CDLL('yolo_cpp_dll_no_gpu.dll', RTLD_GLOBAL)
+    lib = CDLL('yolo_cpp_dll_11.0.dll', RTLD_GLOBAL)
+    #lib = CDLL('yolo_cpp_dll_no_gpu.dll', RTLD_GLOBAL)
 elif ver == '10.1':
-    #lib = CDLL('yolo_cpp_dll_10.1.dll', RTLD_GLOBAL)
-    lib = CDLL('yolo_cpp_dll_no_gpu.dll', RTLD_GLOBAL)
+    lib = CDLL('yolo_cpp_dll_10.1.dll', RTLD_GLOBAL)
+    #lib = CDLL('yolo_cpp_dll_no_gpu.dll', RTLD_GLOBAL)
 
 
 lib.network_width.argtypes = [c_void_p]

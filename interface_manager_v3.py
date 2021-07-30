@@ -28,8 +28,8 @@ def main_program(cam_, cam_url):
     fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 
     # loading Deep learning model
-    net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_full_ship.cfg',
-                     wgtPath=dir_of_file + '/ship/cfg/yolov3_full_ship.weights')
+    net = model_load(cfgPath=dir_of_file + '/ship/cfg/yolov3_tiny_ship.cfg',
+                     wgtPath=dir_of_file + '/ship/cfg/yolov3_tiny_ship.weights')
 
     obj_detect = ObjectDetection(dataPath=dir_of_file + '/ship/cfg/ship.data', netwrk=net, camID=0)
 
