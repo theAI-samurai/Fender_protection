@@ -161,13 +161,17 @@ def main_program(cam_, cam_url):
                                 # save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(cam_) + '_' + curr_time + '.jpg'
                                 # cv2.imwrite(save_unknown_path, image_)
 
+                                save_detect_path = dir_of_file + '/ship/reference_files/detect_' + str(cam_) + '.jpg'
+                                cv2.imwrite(save_detect_path, image_)
+
                                 # NOTIFICATION TRIGGER for Unknown Detection +
                                 # Threat Detections + No Overlap
                                 notification_trigger(cameraID=cam_,
                                                      object='Vessel_No_breach',
                                                      status=cls.decode(),
                                                      object_known='Known',
-                                                     image_path=save_unknown_path)
+                                                     image_path=save_detect_path)
+
 
                                 notification_timer = 0
 
@@ -214,7 +218,7 @@ def main_program(cam_, cam_url):
                         # start timer if Frame not Recieved
                         start_timer = time.time()
                     # check if timer is active for 120 sec or 2 mins
-                    if start_timer != 0 and time.time() - start_timer > 20:
+                    if start_timer != 0 and time.time() - start_timer > 15:
                         active_cams.remove(cam_)            # delete cameraID from Active cam list
                         VLC_PLAYER_OBJECT[cam_].stop()
                         VLC_PLAYER_OBJECT[cam_].release()
