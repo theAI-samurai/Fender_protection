@@ -450,26 +450,7 @@ while cap.isOpened():
     cv2.imshow('fkjbv', frame)
     cv2.waitKey(1) & 0xFF
 
-
-import vlc
-import time
-
-start = time.time()
-ctr = 0
-
-obj = vlc.MediaPlayer()
-media = vlc.Media('D:/darknet_fender_protection/ship/test_data/5output.mp4')
-obj.set_media(media)
-obj.play()
-
-while time.time() - start < 20:
-    print(obj.is_playing())
-    time.sleep(1)
-
-obj.stop()
-obj.release()
-
-#-------------------- threading obeject return--------------
+# -------------------- threading obeject return--------------
 
 from threading import Thread, Lock
 
@@ -486,7 +467,27 @@ while ctr <6:
     print('from while', t)
 
 
+import vlc
+import time
 
+start = time.time()
+ctr = 0
+
+obj = vlc.MediaPlayer()
+media = vlc.Media('rtsp://59.144.163.76:8544/live')
+obj.set_media(media)
+obj.play()
+
+while time.time() - start < 600:
+    #obj.play()
+    if obj.is_playing():
+        snap = obj.video_take_snapshot(0, '1.jpg', 960, 540)
+
+        print(snap, obj.is_playing())
+
+
+obj.stop()
+obj.release()
 
 
 

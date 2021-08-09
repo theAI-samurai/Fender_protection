@@ -57,11 +57,12 @@ def main_program(cam_, cam_url):
             markup_image, minx, miny, maxx, maxy = fender_coordi(path_=markup_img_pa)
 
             # Getting Markup Coordinate for OVERLAP CALCULATIONS
-            if lst_markup_coord is None:
-                lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
+            # if lst_markup_coord is None:
+                #lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
 
             if not restart_status:
                 # Read FRAME IMAGE Path
+                lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
                 read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
                                              path=frame_path, camid=cam_)
@@ -156,9 +157,9 @@ def main_program(cam_, cam_url):
                                     cv2.drawContours(image_, contour, -1, (200, 4, 14), 1)
                                     draw += 1
                             if image_ is not None or (draw > 0 and white_pixel_percent > 0.2):
-                                curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
-                                save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(cam_) + '_' + curr_time + '.jpg'
-                                cv2.imwrite(save_unknown_path, image_)
+                                # curr_time = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
+                                # save_unknown_path = dir_of_file + '/ship/unknown_objects/unk_' + str(cam_) + '_' + curr_time + '.jpg'
+                                # cv2.imwrite(save_unknown_path, image_)
 
                                 # NOTIFICATION TRIGGER for Unknown Detection +
                                 # Threat Detections + No Overlap
