@@ -3,15 +3,15 @@ feeder_path = rtsp://59.144.163.76:8544/live
 param_id = 4
 
 [camera_2]
-feeder_path = rtsp://59.144.163.76:8544/live
+feeder_path = rtsp://admin:admin123@192.168.6.63/Streaming/channels/202
 param_id = 5
 
 [camera_3]
-feeder_path = rtsp://192.168.6.62:8544/live
+feeder_path = rtsp://admin:admin123@192.168.6.63/Streaming/channels/302
 param_id = 8
 
 [camera_4]
-feeder_path = rtsp://192.168.6.62:8544/live
+feeder_path = rtsp://admin:admin123@192.168.6.63/Streaming/channels/402
 param_id = 9
 
 [RESOLUTION]
