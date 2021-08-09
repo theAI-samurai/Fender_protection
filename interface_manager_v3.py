@@ -24,6 +24,7 @@ def main_program(cam_, cam_url):
     lst_markup_coord = None
 
     start_timer = 0
+    markup_coord_timer = time.time()
     notification_timer = 0
     fgbg1 = cv2.bgsegm.createBackgroundSubtractorMOG()
 
@@ -57,12 +58,13 @@ def main_program(cam_, cam_url):
             markup_image, minx, miny, maxx, maxy = fender_coordi(path_=markup_img_pa)
 
             # Getting Markup Coordinate for OVERLAP CALCULATIONS
-            # if lst_markup_coord is None:
-                #lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
+            if lst_markup_coord is None or time.time() - markup_coord_timer > 180:
+                lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
+                lst_markup_coord = time.time()
 
             if not restart_status:
                 # Read FRAME IMAGE Path
-                lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
+                # lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
                 frame_path = dir_of_file + '/ship/reference_files/' + str(cam_) + '.jpg'
                 read = read_frames_using_vlc(player=VLC_PLAYER_OBJECT[cam_], delay_time=3,
                                              path=frame_path, camid=cam_)
