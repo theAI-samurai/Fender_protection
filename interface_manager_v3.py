@@ -60,7 +60,7 @@ def main_program(cam_, cam_url):
             # Getting Markup Coordinate for OVERLAP CALCULATIONS
             if lst_markup_coord is None or time.time() - markup_coord_timer > 180:
                 lst_markup_coord = markup_coordinate(markup_img_path=markup_img_pa)
-                lst_markup_coord = time.time()
+                markup_coord_timer = time.time()
 
             if not restart_status:
                 # Read FRAME IMAGE Path
