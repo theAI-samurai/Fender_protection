@@ -3,7 +3,7 @@
   This project was completed on a freelance basis, and with the stipulated time frame of 3 months.
   We use RTSP camera to track incoming and outgoing ships, and raise an alarm at docks when an object/ship approaches too close to the Fenders.
 
-# D@rknet Architecture
+## D@rknet Architecture
 We built the darknet model on windows and DLL files for CUDA 10.1 and 11.0 are included.
 If GPU/CUDA is not availabel use the *_no_gpu.dll* file. the dll files have been built using OPENCV
 
