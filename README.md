@@ -1,6 +1,6 @@
 # About the Project
 
-  This project was completed on a freelance basis, and within the stipulated time frame of 3 months.
+  This project was completed on a freelance basis, and within the stipulated time frame of 6 - 8 months.
   We use RTSP camera to track incoming and outgoing ships, and raise an alarm at docks when an object/ship approaches too close to the Fenders.
 
 ## D@rknet Architecture
